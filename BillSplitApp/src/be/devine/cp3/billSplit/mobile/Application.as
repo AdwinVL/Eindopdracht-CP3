@@ -1,12 +1,15 @@
 package be.devine.cp3.billSplit.mobile {
+import be.devine.cp3.billSplit.mobile.view.Home;
+import be.devine.cp3.billSplit.mobile.view.Split;
 import be.devine.cp3.billSplit.model.AppModel;
 
-import feathers.controls.Header;
-import feathers.controls.NumericStepper;
+import feathers.controls.ScreenNavigator;
+import feathers.controls.ScreenNavigatorItem;
+import feathers.motion.transitions.ScreenSlidingStackTransitionManager;
 
 import feathers.themes.MetalWorksMobileTheme;
 
-import flash.events.Event;
+import starling.animation.Transitions;
 
 import starling.display.Sprite;
 import starling.events.Event;
@@ -15,8 +18,11 @@ public class Application extends Sprite
 {
     private var _appModel:AppModel;
 
-    private var _header:Header;
-    private var _stepper:NumericStepper;
+    private var _navigator:ScreenNavigator;
+
+    private static const HOME:String = "home";
+    private static const SPLIT:String = "split";
+    private var _transitionManager:ScreenSlidingStackTransitionManager;
 
     public function Application()
     {
@@ -24,25 +30,27 @@ public class Application extends Sprite
 
         _appModel = AppModel.getInstance();
 
-        _header = new Header();
-        _header.title = "Bill Split app";
-        addChild( _header );
+        _navigator = new ScreenNavigator();
+        _navigator.autoSizeMode = ScreenNavigator.AUTO_SIZE_MODE_CONTENT;
+        _navigator.addScreen( HOME, new ScreenNavigatorItem( Home ) );
+        _navigator.addScreen( SPLIT, new ScreenNavigatorItem( Split ) );
+        addChild( _navigator );
 
-        _stepper = new NumericStepper();
-        _stepper.minimum = 0;
-        _stepper.maximum = 100;
-        _stepper.value = 50;
-        _stepper.step = 1;
-        addChild( _stepper );
+        _transitionManager = new ScreenSlidingStackTransitionManager( _navigator );
+        _transitionManager.duration = 1;
+        _transitionManager.ease = Transitions.EASE_OUT;
 
-        addEventListener(starling.events.Event.ADDED_TO_STAGE, addedHandler);
+        _navigator.showScreen( HOME );
+
+        addEventListener(Event.ADDED_TO_STAGE, addedHandler);
+        addEventListener(Home.CLICKED, triggeredHandler);
     }
 
-    private function addedHandler(event:starling.events.Event):void
+    private function addedHandler(event:Event):void
     {
-        removeEventListener(starling.events.Event.ADDED_TO_STAGE, addedHandler);
+        removeEventListener(Event.ADDED_TO_STAGE, addedHandler);
 
-        stage.addEventListener(starling.events.Event.RESIZE, resizeHandler);
+        stage.addEventListener(Event.RESIZE, resizeHandler);
 
         layout();
     }
@@ -54,11 +62,12 @@ public class Application extends Sprite
 
     private function layout():void
     {
-        _header.setSize(stage.stageWidth, 50);
 
-        _stepper.x = 10;
-        _stepper.y = 100;
-        _stepper.setSize(stage.stageWidth - 20, 50);
+    }
+
+    private function triggeredHandler(event:starling.events.Event):void
+    {
+        _navigator.showScreen( SPLIT );
     }
 }
 }
