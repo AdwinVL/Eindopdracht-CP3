@@ -56,7 +56,7 @@ public class Home extends Sprite
     private function triggeredHandler(event:starling.events.Event):void
     {
         trace("[HOME] clicked");
-        dispatchEvent(new starling.events.Event(CLICKED));
+        dispatchEventWith(CLICKED, true);
     }
 
     private function addedHandler(event:starling.events.Event):void
