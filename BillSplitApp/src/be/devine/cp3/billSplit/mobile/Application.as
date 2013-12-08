@@ -24,8 +24,9 @@ public class Application extends Sprite
 
     private static const HOME:String = "home";
     private static const SPLIT:String = "split";
+    private var pages:Array;
     private var _transitionManager:ScreenSlidingStackTransitionManager;
-    private var home:Home;
+
 
     public function Application()
     {
@@ -53,7 +54,8 @@ public class Application extends Sprite
     {
         removeEventListener(Event.ADDED_TO_STAGE, addedHandler);
 
-        home = new Home;
+        pages=[HOME,SPLIT];
+
         addEventListener(Home.CLICKED, triggeredHandler);
 
         stage.addEventListener(ResizeEvent.RESIZE, resizeHandler);
@@ -85,8 +87,19 @@ public class Application extends Sprite
 
     private function triggeredHandler(event:starling.events.Event):void
     {
-        trace("--- Screen Slide ---");
-        _navigator.showScreen( SPLIT );
+
+        switch(_appModel.currentPage){
+            case HOME:
+                _navigator.showScreen( SPLIT );
+                _appModel.currentPage = SPLIT;
+                trace("[APPLICATION] --- Screen Slide --- to " + _appModel.currentPage);
+                break;
+            case SPLIT:
+                //_navigator.showScreen( NEXT... );
+                _appModel.currentPage = "next in line"; /* geen echte pagina, lol */
+                trace("[APPLICATION] --- Screen Slide --- to " + _appModel.currentPage);
+                break;
+        }
     }
 }
 }

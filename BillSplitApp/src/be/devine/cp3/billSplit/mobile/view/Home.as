@@ -1,20 +1,11 @@
-/**
- * Created with IntelliJ IDEA.
- * User: JoonVT
- * Date: 05/12/13
- * Time: 15:33
- * To change this template use File | Settings | File Templates.
- */
 package be.devine.cp3.billSplit.mobile.view {
-import be.devine.cp3.billSplit.mobile.view.Home;
+import be.devine.cp3.billSplit.mobile.view.controls.navButton;
 import be.devine.cp3.billSplit.model.AppModel;
 
 import feathers.controls.Button;
 
 import feathers.controls.Header;
 import feathers.controls.NumericStepper;
-
-import flash.events.Event;
 
 import starling.display.Sprite;
 import starling.events.Event;
@@ -28,7 +19,7 @@ public class Home extends Sprite
     private var _stepper:NumericStepper;
 
     public static const CLICKED:String = "clicked";
-    private var _button:Button;
+    private var _buttonToSplit:navButton;
 
     public function Home()
     {
@@ -45,10 +36,10 @@ public class Home extends Sprite
         _stepper.step = 1;
         addChild( _stepper );
 
-        _button = new Button();
-        _button.label = 'next boyyy';
-        _button.addEventListener( starling.events.Event.TRIGGERED, triggeredHandler );
-        addChild( _button );
+        _buttonToSplit = new navButton('split');
+        _buttonToSplit.label = 'next boyyy';
+        _buttonToSplit.addEventListener( starling.events.Event.TRIGGERED, triggeredHandler );
+        addChild( _buttonToSplit );
 
         addEventListener(starling.events.Event.ADDED_TO_STAGE, addedHandler);
     }
@@ -81,9 +72,9 @@ public class Home extends Sprite
         _stepper.y = 100;
         _stepper.setSize(stage.stageWidth - 20, 50);
 
-        _button.x = 10;
-        _button.y = stage.stageHeight - 60;
-        _button.setSize(stage.stageWidth - 20, 50);
+        _buttonToSplit.x = 10;
+        _buttonToSplit.y = stage.stageHeight - 60;
+        _buttonToSplit.setSize(stage.stageWidth - 20, 50);
     }
 }
 }
