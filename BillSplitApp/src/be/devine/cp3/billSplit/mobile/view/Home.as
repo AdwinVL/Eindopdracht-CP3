@@ -18,6 +18,7 @@ import flash.events.Event;
 
 import starling.display.Sprite;
 import starling.events.Event;
+import starling.events.ResizeEvent;
 
 public class Home extends Sprite
 {
@@ -45,8 +46,8 @@ public class Home extends Sprite
         addChild( _stepper );
 
         _button = new Button();
-        _button.label = 'hello';
-        _button.addEventListener( starling.events.Event.TRIGGERED, triggeredHandler);
+        _button.label = 'next boyyy';
+        _button.addEventListener( starling.events.Event.TRIGGERED, triggeredHandler );
         addChild( _button );
 
         addEventListener(starling.events.Event.ADDED_TO_STAGE, addedHandler);
@@ -54,6 +55,7 @@ public class Home extends Sprite
 
     private function triggeredHandler(event:starling.events.Event):void
     {
+        trace("[HOME] clicked");
         dispatchEvent(new starling.events.Event(CLICKED));
     }
 
@@ -61,12 +63,12 @@ public class Home extends Sprite
     {
         removeEventListener(starling.events.Event.ADDED_TO_STAGE, addedHandler);
 
-        stage.addEventListener(starling.events.Event.RESIZE, resizeHandler);
+        stage.addEventListener(ResizeEvent.RESIZE, resizeHandler);
 
         layout();
     }
 
-    private function resizeHandler(event:starling.events.Event):void
+    private function resizeHandler(event:ResizeEvent):void
     {
         layout();
     }

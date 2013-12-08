@@ -10,9 +10,11 @@ import feathers.motion.transitions.ScreenSlidingStackTransitionManager;
 import feathers.themes.MetalWorksMobileTheme;
 
 import starling.animation.Transitions;
+import starling.core.Starling;
 
 import starling.display.Sprite;
 import starling.events.Event;
+import starling.events.ResizeEvent;
 
 public class Application extends Sprite
 {
@@ -43,21 +45,34 @@ public class Application extends Sprite
         _navigator.showScreen( HOME );
 
         addEventListener(Event.ADDED_TO_STAGE, addedHandler);
-        addEventListener(Home.CLICKED, triggeredHandler);
+
     }
 
     private function addedHandler(event:Event):void
     {
         removeEventListener(Event.ADDED_TO_STAGE, addedHandler);
+        addEventListener(Home.CLICKED, triggeredHandler);
 
-        stage.addEventListener(Event.RESIZE, resizeHandler);
+        stage.addEventListener(ResizeEvent.RESIZE, resizeHandler);
 
         layout();
     }
 
-    private function resizeHandler(event:starling.events.Event):void
+    private function resizeHandler(event:ResizeEvent):void
     {
-        layout();
+        var eventHeight:uint = event.height;
+        var eventWidth:uint = event.width;
+        var stageHoogte:uint = stage.stageHeight;
+        var stageBreedte:uint = stage.stageWidth;
+
+        trace("--- Resize ---");
+
+        stage.stageWidth = event.width;
+        stage.stageHeight = event.height;
+        trace("[APPLICATION] starling.viewPort.width: " + Starling.current.viewPort.width);
+        trace("[APPLICATION] starling.viewPort.height: " + Starling.current.viewPort.height);
+        trace("[APPLICATION] stage.stageWidth: " + stageBreedte + " -->> " + event.width);
+        trace("[APPLICATION] stage.stageHeight: " + stageHoogte + " -->> " + event.height);
     }
 
     private function layout():void
@@ -67,6 +82,7 @@ public class Application extends Sprite
 
     private function triggeredHandler(event:starling.events.Event):void
     {
+        trace("--- Screen Slide ---");
         _navigator.showScreen( SPLIT );
     }
 }
