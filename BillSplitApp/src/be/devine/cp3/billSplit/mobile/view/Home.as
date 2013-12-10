@@ -46,7 +46,8 @@ public class Home extends Sprite
 
     private function triggeredHandler(event:starling.events.Event):void
     {
-        trace("[HOME] clicked");
+        var button:navButton = navButton(event.currentTarget);
+        _appModel.destination = button.destination;
         dispatchEventWith(CLICKED, true);
     }
 

@@ -1,7 +1,10 @@
 package be.devine.cp3.billSplit.mobile {
 import be.devine.cp3.billSplit.mobile.view.Home;
 import be.devine.cp3.billSplit.mobile.view.Split;
+import be.devine.cp3.billSplit.mobile.view.controls.navButton;
 import be.devine.cp3.billSplit.model.AppModel;
+
+import feathers.controls.Button;
 
 import feathers.controls.ScreenNavigator;
 import feathers.controls.ScreenNavigatorItem;
@@ -26,11 +29,12 @@ public class Application extends Sprite
     private static const SPLIT:String = "split";
     private var pages:Array;
     private var _transitionManager:ScreenSlidingStackTransitionManager;
-
+    private var _theme:MetalWorksMobileTheme;
 
     public function Application()
     {
-        new MetalWorksMobileTheme();
+        _theme = new MetalWorksMobileTheme();
+        _theme.setInitializerForClass(navButton, _theme.getInitializerForClass(Button));
 
         _appModel = AppModel.getInstance();
 
@@ -88,15 +92,15 @@ public class Application extends Sprite
     private function triggeredHandler(event:starling.events.Event):void
     {
 
-        switch(_appModel.currentPage){
+        switch(_appModel.destination){
             case HOME:
-                _navigator.showScreen( SPLIT );
-                _appModel.currentPage = SPLIT;
+                _navigator.showScreen( HOME );
+                _appModel.currentPage = HOME;
                 trace("[APPLICATION] --- Screen Slide --- to " + _appModel.currentPage);
                 break;
             case SPLIT:
-                //_navigator.showScreen( NEXT... );
-                _appModel.currentPage = "next in line"; /* geen echte pagina, lol */
+                _navigator.showScreen( SPLIT );
+                _appModel.currentPage = SPLIT; /* geen echte pagina, lol */
                 trace("[APPLICATION] --- Screen Slide --- to " + _appModel.currentPage);
                 break;
         }
