@@ -58,6 +58,10 @@ public class Application extends Sprite
     {
         removeEventListener(Event.ADDED_TO_STAGE, addedHandler);
 
+        Main._splashPic.parent.removeChild(Main._splashPic);
+        Main._splashPic = null;
+
+
         pages=[HOME,SPLIT];
 
         addEventListener(Home.CLICKED, triggeredHandler);
