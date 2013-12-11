@@ -57,6 +57,9 @@ public class Split extends Screen
 
     private function layout():void
     {
+        _header.title = "splitt da bill";
+        _header.setSize(stage.stageWidth, 70);
+
         _stepper.x = 10;
         _stepper.y = 100;
         _stepper.setSize(stage.stageWidth - 20, 50);

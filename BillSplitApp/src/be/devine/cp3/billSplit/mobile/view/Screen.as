@@ -16,7 +16,6 @@ public class Screen extends Sprite
         _appModel = AppModel.getInstance();
 
         _header = new Header();
-        _header.title = "billsplit app";
         addChild( _header );
     }
 }

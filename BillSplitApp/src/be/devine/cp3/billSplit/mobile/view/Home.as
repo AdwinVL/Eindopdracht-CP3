@@ -100,6 +100,9 @@ public class Home extends Screen
 
     private function layout():void
     {
+        _header.title = "billsplit app";
+        _header.setSize(stage.stageWidth, 70);
+
         var _headerHeight:Number = 70;
 
         _stepperBg.y = _headerHeight;
