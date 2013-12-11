@@ -66,7 +66,8 @@ public class Application extends Sprite
     }
 
     private function addedHandler(event:Event):void
-    {trace("added Application");
+    {
+        trace("added Application");
         removeEventListener(Event.ADDED_TO_STAGE, addedHandler);
         addEventListener(Home.CLICKED, triggeredHandler);
         stage.addEventListener(ResizeEvent.RESIZE, resizeHandler);

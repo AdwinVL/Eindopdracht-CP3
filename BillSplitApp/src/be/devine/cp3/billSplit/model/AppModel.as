@@ -46,7 +46,7 @@ public class AppModel extends EventDispatcher
     public function set destination(value:String):void {
         if (_destination == value) return;
         _destination = value;
-        //dispatchEvent(new Event("destinationChanged"));
+        dispatchEvent(new Event("destinationChanged"));
         trace("[APPMODEL] new destination: "+_destination);
     }
 }

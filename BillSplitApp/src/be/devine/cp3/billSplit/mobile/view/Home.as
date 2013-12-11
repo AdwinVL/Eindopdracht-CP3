@@ -13,9 +13,8 @@ import starling.display.Sprite;
 import starling.events.Event;
 import starling.events.ResizeEvent;
 
-public class Home extends Sprite
+public class Home extends Screen
 {
-    private var _appModel:AppModel;
 
     private var _stepper:NumericStepper;
     private var _stepperBg:Quad;
@@ -28,8 +27,6 @@ public class Home extends Sprite
 
     public function Home()
     {
-        _appModel = AppModel.getInstance();
-
         _stepper = new NumericStepper();
         _stepper.minimum = 0;
         _stepper.maximum = 20;
@@ -68,7 +65,6 @@ public class Home extends Sprite
 
     private function addedHandler(event:starling.events.Event):void
     {
-        include "parts/header.as"
         _stepperBg = new Quad(stage.stageWidth, (stage.stageHeight*17.5)/100, 0x333745);
         addChild( _stepperBg );
         addChild( _stepper );
@@ -115,7 +111,8 @@ public class Home extends Sprite
         _buttonToSplit.y = _headerHeight + _stepperBg.height;
         _buttonToCostum.y = _headerHeight + _stepperBg.height;
 
-        if(stage.stageHeight < stage.stageWidth){
+        if(stage.stageHeight < stage.stageWidth)
+        {
             _buttonToSplit.setSize(stage.stageWidth / 4, stage.stageWidth / 4);
             _buttonToCostum.setSize(stage.stageWidth / 4, stage.stageWidth / 4);
             _buttonToHistory.setSize(stage.stageWidth / 4, stage.stageWidth / 4);
@@ -129,7 +126,8 @@ public class Home extends Sprite
             _buttonToHistory.y = _headerHeight + _stepperBg.height;
             _buttonToSettings.y = _headerHeight + _stepperBg.height;
         }
-        else{
+        else
+        {
             _buttonToSplit.setSize(stage.stageWidth / 2, stage.stageWidth / 2);
             _buttonToCostum.setSize(stage.stageWidth / 2, stage.stageWidth / 2);
             _buttonToHistory.setSize(stage.stageWidth / 2, stage.stageWidth / 2);

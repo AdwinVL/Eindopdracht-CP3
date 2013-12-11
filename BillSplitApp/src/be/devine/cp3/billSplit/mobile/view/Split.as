@@ -1,22 +1,12 @@
-/**
- * Created with IntelliJ IDEA.
- * User: JoonVT
- * Date: 05/12/13
- * Time: 15:33
- * To change this template use File | Settings | File Templates.
- */
 package be.devine.cp3.billSplit.mobile.view {
 import be.devine.cp3.billSplit.mobile.view.controls.navButton;
-import be.devine.cp3.billSplit.model.AppModel;
 
 import feathers.controls.NumericStepper;
 
-import starling.display.Sprite;
 import starling.events.Event;
 
-public class Split extends Sprite
+public class Split extends Screen
 {
-    private var _appModel:AppModel;
     private var _buttonToHome:navButton;
     private var _stepper:NumericStepper;
     public static const CLICKED:String = "clicked";
@@ -24,8 +14,6 @@ public class Split extends Sprite
 
     public function Split()
     {
-        _appModel = AppModel.getInstance();
-
         _stepper = new NumericStepper();
         _stepper.minimum = 0;
         _stepper.maximum = 100;
@@ -44,8 +32,6 @@ public class Split extends Sprite
 
     private function addedHandler(event:starling.events.Event):void
     {
-        include "parts/header.as"
-
         removeEventListener(starling.events.Event.ADDED_TO_STAGE, addedHandler);
         stage.addEventListener(starling.events.Event.RESIZE, resizeHandler);
 
