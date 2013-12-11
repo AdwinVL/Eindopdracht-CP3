@@ -11,6 +11,7 @@ import flash.geom.Rectangle;
 
 import starling.core.Starling;
 import starling.events.Event;
+import starling.textures.TextureSmoothing;
 
 [SWF(frameRate=60)]
 
@@ -29,6 +30,7 @@ public class Main extends Sprite
         _splashPic = new Splash();
         _splashPic.width = 480;
         _splashPic.height = 800;
+        _splashPic.smoothing = TextureSmoothing.TRILINEAR;
         addChild(_splashPic);
 
 

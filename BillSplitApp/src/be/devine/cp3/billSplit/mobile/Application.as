@@ -1,5 +1,8 @@
 package be.devine.cp3.billSplit.mobile {
+import be.devine.cp3.billSplit.mobile.view.Costum;
+import be.devine.cp3.billSplit.mobile.view.History;
 import be.devine.cp3.billSplit.mobile.view.Home;
+import be.devine.cp3.billSplit.mobile.view.Settings;
 import be.devine.cp3.billSplit.mobile.view.Split;
 import be.devine.cp3.billSplit.mobile.view.controls.navButton;
 import be.devine.cp3.billSplit.model.AppModel;
@@ -9,7 +12,6 @@ import feathers.controls.Button;
 import feathers.controls.ScreenNavigator;
 import feathers.controls.ScreenNavigatorItem;
 import feathers.motion.transitions.ScreenSlidingStackTransitionManager;
-
 import feathers.themes.MetalWorksMobileTheme;
 
 import starling.animation.Transitions;
@@ -22,14 +24,21 @@ import starling.events.ResizeEvent;
 public class Application extends Sprite
 {
     private var _appModel:AppModel;
-
     private var _navigator:ScreenNavigator;
-
     private static const HOME:String = "home";
     private static const SPLIT:String = "split";
+    private static const COSTUM:String = "costum";
+    private static const HISTORY:String = "history";
+    private static const SETTINGS:String = "settings";
     private var pages:Array;
     private var _transitionManager:ScreenSlidingStackTransitionManager;
     private var _theme:MetalWorksMobileTheme;
+
+    [Embed(source="/../assets/fonts/Blanch/BLANCH_CONDENSED.otf", embedAsCFF="false", fontFamily="Blanch")]
+    private static const Blanch:Class;
+
+    [Embed(source="/../assets/fonts/Insignia LT Std/InsigniaLTStd.otf", embedAsCFF="false", fontFamily="Insignia")]
+    private static const Insignia:Class;
 
     public function Application()
     {
@@ -42,33 +51,30 @@ public class Application extends Sprite
         _navigator.autoSizeMode = ScreenNavigator.AUTO_SIZE_MODE_CONTENT;
         _navigator.addScreen( HOME, new ScreenNavigatorItem( Home ) );
         _navigator.addScreen( SPLIT, new ScreenNavigatorItem( Split ) );
+        _navigator.addScreen( COSTUM, new ScreenNavigatorItem( Costum ) );
+        _navigator.addScreen( HISTORY, new ScreenNavigatorItem( History ) );
+        _navigator.addScreen( SETTINGS, new ScreenNavigatorItem( Settings ) );
         addChild( _navigator );
 
         _transitionManager = new ScreenSlidingStackTransitionManager( _navigator );
-        _transitionManager.duration = 1;
+        _transitionManager.duration = 0.5;
         _transitionManager.ease = Transitions.EASE_OUT;
 
         _navigator.showScreen( HOME );
 
         addEventListener(Event.ADDED_TO_STAGE, addedHandler);
-
     }
 
     private function addedHandler(event:Event):void
-    {
+    {trace("added Application");
         removeEventListener(Event.ADDED_TO_STAGE, addedHandler);
+        addEventListener(Home.CLICKED, triggeredHandler);
+        stage.addEventListener(ResizeEvent.RESIZE, resizeHandler);
 
         Main._splashPic.parent.removeChild(Main._splashPic);
         Main._splashPic = null;
 
-
-        pages=[HOME,SPLIT];
-
-        addEventListener(Home.CLICKED, triggeredHandler);
-
-        stage.addEventListener(ResizeEvent.RESIZE, resizeHandler);
-
-        layout();
+        pages=[HOME,SPLIT,COSTUM,HISTORY,SETTINGS];
     }
 
     private function resizeHandler(event:ResizeEvent):void
@@ -88,26 +94,11 @@ public class Application extends Sprite
         trace("[APPLICATION] stage.stageHeight: " + stageHoogte + " -->> " + event.height);
     }
 
-    private function layout():void
-    {
-
-    }
-
     private function triggeredHandler(event:starling.events.Event):void
     {
-
-        switch(_appModel.destination){
-            case HOME:
-                _navigator.showScreen( HOME );
-                _appModel.currentPage = HOME;
-                trace("[APPLICATION] --- Screen Slide --- to " + _appModel.currentPage);
-                break;
-            case SPLIT:
-                _navigator.showScreen( SPLIT );
-                _appModel.currentPage = SPLIT; /* geen echte pagina, lol */
-                trace("[APPLICATION] --- Screen Slide --- to " + _appModel.currentPage);
-                break;
-        }
+        _navigator.showScreen( _appModel.destination );
+        _appModel.currentPage = _appModel.destination;
+        trace("[APPLICATION] --- Screen Slide --- to " + _appModel.currentPage);
     }
 }
 }
