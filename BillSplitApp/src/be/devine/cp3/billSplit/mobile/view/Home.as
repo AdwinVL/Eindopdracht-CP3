@@ -10,6 +10,7 @@ import flash.text.AutoCapitalize;
 
 import starling.display.Quad;
 import starling.display.Sprite;
+import starling.display.Stage;
 import starling.events.Event;
 import starling.events.ResizeEvent;
 
@@ -68,6 +69,10 @@ public class Home extends Screen
 
     private function addedHandler(event:starling.events.Event):void
     {
+        removeEventListener(starling.events.Event.ADDED_TO_STAGE, addedHandler);
+        stage.addEventListener(ResizeEvent.RESIZE, resizeHandler);
+        addEventListener(starling.events.Event.REMOVED_FROM_STAGE, removedHandler);
+
         _stepperBg = new Quad(stage.stageWidth, (stage.stageHeight*17.5)/100, 0x333745);
         addChild( _stepperBg );
         addChild( _stepper );
@@ -76,10 +81,11 @@ public class Home extends Screen
         addChild( _buttonToHistory );
         addChild( _buttonToSettings );
 
-        removeEventListener(starling.events.Event.ADDED_TO_STAGE, addedHandler);
-        stage.addEventListener(ResizeEvent.RESIZE, resizeHandler);
-
         layout();
+    }
+
+    private function removedHandler(event:Event):void {
+        stageRef.removeEventListener(ResizeEvent.RESIZE, resizeHandler);
     }
 
     public static function headerTextEditorFactory():ITextEditor
