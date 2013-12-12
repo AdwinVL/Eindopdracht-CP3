@@ -6,9 +6,12 @@ public class AppModel extends EventDispatcher
 {
     private static var instance:AppModel;
 
-    private var _currentPage:String = "home";
-    private var _destination:String ="";
     public static const CURRENTPAGE_CHANGED_EVENT:String = "currentPageChanged";
+
+    private var _currentPage:String = "home";
+    private var _destination:String = "";
+
+    private var _payers:Number;
 
     public static function getInstance():AppModel
     {
@@ -27,11 +30,13 @@ public class AppModel extends EventDispatcher
     }
 
     [Bindable(event="currentPageChanged")]
-    public function get currentPage():String {
+    public function get currentPage():String
+    {
         return _currentPage;
     }
 
-    public function set currentPage(value:String):void {
+    public function set currentPage(value:String):void
+    {
         if (_currentPage == value) return;
         _currentPage = value;
         dispatchEvent(new Event(CURRENTPAGE_CHANGED_EVENT));
@@ -39,15 +44,27 @@ public class AppModel extends EventDispatcher
     }
 
     [Bindable(event="destinationChanged")]
-    public function get destination():String {
+    public function get destination():String
+    {
         return _destination;
     }
 
-    public function set destination(value:String):void {
+    public function set destination(value:String):void
+    {
         if (_destination == value) return;
         _destination = value;
         dispatchEvent(new Event("destinationChanged"));
         trace("[APPMODEL] new destination: "+_destination);
+    }
+
+    public function get payers():Number
+    {
+        return _payers;
+    }
+
+    public function set payers(value:Number):void
+    {
+        _payers = value;
     }
 }
 }

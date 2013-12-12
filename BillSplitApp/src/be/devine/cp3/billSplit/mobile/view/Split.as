@@ -1,7 +1,9 @@
 package be.devine.cp3.billSplit.mobile.view {
 import be.devine.cp3.billSplit.mobile.view.controls.navButton;
 
-import feathers.controls.NumericStepper;
+import feathers.controls.Label;
+
+import feathers.controls.TextInput;
 
 import starling.display.DisplayObject;
 
@@ -14,28 +16,31 @@ public class Split extends Screen
     private var _btnHome:navButton;
     private var _btnNext:navButton;
 
-    private var _stepper:NumericStepper;
-
+    private var _lblToPay:Label;
+    private var _toPay:TextInput;
 
     public function Split()
     {
-        _stepper = new NumericStepper();
-        _stepper.minimum = 0;
-        _stepper.maximum = 100;
-        _stepper.value = 20;
-        _stepper.step = 1;
-        addChild( _stepper );
 
         _btnHome = new navButton('home');
         _btnHome.label = 'home';
         _btnHome.addEventListener( starling.events.Event.TRIGGERED, triggeredHandler );
 
         _btnNext = new navButton('custom');
-        _btnNext.label = 'custom';
+        _btnNext.label = 'next';
         _btnNext.addEventListener( starling.events.Event.TRIGGERED, triggeredHandler );
 
         _header.leftItems = new <DisplayObject>[ _btnHome ];
         _header.rightItems = new <DisplayObject>[ _btnNext ];
+
+        _lblToPay = new Label();
+        _lblToPay.text = 'How much to pay?';
+        addChild(_lblToPay);
+
+        _toPay = new TextInput();
+        _toPay.maxChars = 4;
+        _toPay.restrict = "0-9";
+        addChild(_toPay);
 
         addEventListener(starling.events.Event.ADDED_TO_STAGE, addedHandler);
     }
@@ -62,12 +67,16 @@ public class Split extends Screen
 
     private function layout():void
     {
-        _header.title = "splitt da bill";
+        _header.title = String(_appModel.payers) + '-way split';
         _header.setSize(stage.stageWidth, 70);
 
-        _stepper.x = 10;
-        _stepper.y = 100;
-        _stepper.setSize(stage.stageWidth - 20, 50);
+        _lblToPay.x = 10;
+        _lblToPay.y = _header.height + 20;
+        _lblToPay.setSize(stage.stageWidth - 20, 30);
+
+        _toPay.x = 10;
+        _toPay.y = _header.height + _lblToPay.height + 20;
+        _toPay.setSize(stage.stageWidth - 20, 50);
     }
 }
 }

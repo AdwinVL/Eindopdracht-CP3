@@ -59,7 +59,10 @@ public class Home extends Screen
     private function triggeredHandler(event:starling.events.Event):void
     {
         var button:navButton = navButton(event.currentTarget);
+
+        _appModel.payers = _stepper.value;
         _appModel.destination = button.destination;
+
         dispatchEventWith(CLICKED, true);
     }
 
@@ -103,16 +106,14 @@ public class Home extends Screen
         _header.title = "billsplit app";
         _header.setSize(stage.stageWidth, 70);
 
-        var _headerHeight:Number = 70;
-
-        _stepperBg.y = _headerHeight;
+        _stepperBg.y = _header.height;
         _stepperBg.width = stage.stageWidth;
 
         _stepper.setSize(stage.stageWidth, 90);
-        _stepper.y = _headerHeight + (_stepperBg.height-_stepper.height)/2;
+        _stepper.y = _header.height + (_stepperBg.height-_stepper.height)/2;
 
-        _buttonToSplit.y = _headerHeight + _stepperBg.height;
-        _buttonToCostum.y = _headerHeight + _stepperBg.height;
+        _buttonToSplit.y = _header.height + _stepperBg.height;
+        _buttonToCostum.y = _header.height + _stepperBg.height;
 
         if(stage.stageHeight < stage.stageWidth)
         {
@@ -126,8 +127,8 @@ public class Home extends Screen
             _buttonToHistory.x = (stage.stageWidth / 4)*2;
             _buttonToSettings.x = (stage.stageWidth / 4)*3;
 
-            _buttonToHistory.y = _headerHeight + _stepperBg.height;
-            _buttonToSettings.y = _headerHeight + _stepperBg.height;
+            _buttonToHistory.y = _header.height + _stepperBg.height;
+            _buttonToSettings.y = _header.height + _stepperBg.height;
         }
         else
         {
@@ -141,8 +142,8 @@ public class Home extends Screen
             _buttonToCostum.x = stage.stageWidth / 2;
             _buttonToSettings.x = stage.stageWidth / 2;
 
-            _buttonToHistory.y = _headerHeight + _stepperBg.height + _buttonToSplit.height;
-            _buttonToSettings.y = _headerHeight + _stepperBg.height + _buttonToSplit.height;
+            _buttonToHistory.y = _header.height + _stepperBg.height + _buttonToSplit.height;
+            _buttonToSettings.y = _header.height + _stepperBg.height + _buttonToSplit.height;
         }
     }
 }

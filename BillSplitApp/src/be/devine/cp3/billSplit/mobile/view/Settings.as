@@ -1,6 +1,8 @@
 package be.devine.cp3.billSplit.mobile.view {
 import be.devine.cp3.billSplit.mobile.view.controls.navButton;
 
+import feathers.controls.ToggleSwitch;
+
 import starling.display.DisplayObject;
 
 import starling.events.Event;
@@ -10,7 +12,8 @@ public class Settings extends Screen
     public static const CLICKED:String = "clicked";
 
     private var _btnHome:navButton;
-    private var _btnNext:navButton;
+
+    private var _toggle:ToggleSwitch;
 
     public function Settings()
     {
@@ -18,12 +21,11 @@ public class Settings extends Screen
         _btnHome.label = 'home';
         _btnHome.addEventListener( starling.events.Event.TRIGGERED, triggeredHandler );
 
-        _btnNext = new navButton('custom');
-        _btnNext.label = 'custom';
-        _btnNext.addEventListener( starling.events.Event.TRIGGERED, triggeredHandler );
-
         _header.leftItems = new <DisplayObject>[ _btnHome ];
-        _header.rightItems = new <DisplayObject>[ _btnNext ];
+
+        _toggle = new ToggleSwitch();
+        _toggle.isSelected = true;
+        addChild( _toggle );
 
         addEventListener(starling.events.Event.ADDED_TO_STAGE, addedHandler);
     }
@@ -52,6 +54,10 @@ public class Settings extends Screen
     {
         _header.title = "settings";
         _header.setSize(stage.stageWidth, 70);
+
+        _toggle.x = 10;
+        _toggle.y = _header.height + 20;
+        _toggle.setSize(stage.stageWidth - 20, 50);
     }
 }
 }
