@@ -42,8 +42,8 @@ public class Home extends Screen
         _buttonToSplit.label = 'Regular Split';
         _buttonToSplit.addEventListener( starling.events.Event.TRIGGERED, triggeredHandler );
 
-        _buttonToCostum = new navButton('costum');
-        _buttonToCostum.label = 'Costum Input';
+        _buttonToCostum = new navButton('custom');
+        _buttonToCostum.label = 'Custom Input';
         _buttonToCostum.addEventListener( starling.events.Event.TRIGGERED, triggeredHandler );
 
         _buttonToHistory = new navButton('history');

@@ -1,22 +1,30 @@
 package be.devine.cp3.billSplit.mobile.view {
 import be.devine.cp3.billSplit.mobile.view.controls.navButton;
 
+import starling.display.DisplayObject;
+
 import starling.events.Event;
 import starling.events.ResizeEvent;
 
-public class Costum extends Screen
+public class Custom extends Screen
 {
     public static const CLICKED:String = "clicked";
 
-    private var _buttonToHome:navButton;
+    private var _btnHome:navButton;
+    private var _btnNext:navButton;
 
-    public function Costum()
+    public function Custom()
     {
-        _buttonToHome = new navButton('home');
-        _buttonToHome.label = 'home';
-        _buttonToHome.addEventListener( starling.events.Event.TRIGGERED, triggeredHandler );
-        addChild( _buttonToHome );
-        setChildIndex(_buttonToHome, 99);
+        _btnHome = new navButton('home');
+        _btnHome.label = 'home';
+        _btnHome.addEventListener( starling.events.Event.TRIGGERED, triggeredHandler );
+
+        _btnNext = new navButton('custom');
+        _btnNext.label = 'custom';
+        _btnNext.addEventListener( starling.events.Event.TRIGGERED, triggeredHandler );
+
+        _header.leftItems = new <DisplayObject>[ _btnHome ];
+        _header.rightItems = new <DisplayObject>[ _btnNext ];
 
         addEventListener(starling.events.Event.ADDED_TO_STAGE, addedHandler);
     }
@@ -48,7 +56,7 @@ public class Costum extends Screen
 
     private function layout():void
     {
-        _header.title = "splitt da bill";
+        _header.title = "custom";
         _header.setSize(stage.stageWidth, 70);
     }
 }
