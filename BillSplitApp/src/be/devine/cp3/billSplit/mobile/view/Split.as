@@ -3,13 +3,18 @@ import be.devine.cp3.billSplit.mobile.view.controls.navButton;
 
 import feathers.controls.NumericStepper;
 
+import starling.display.DisplayObject;
+
 import starling.events.Event;
 
 public class Split extends Screen
 {
-    private var _buttonToHome:navButton;
-    private var _stepper:NumericStepper;
     public static const CLICKED:String = "clicked";
+
+    private var _btnHome:navButton;
+    private var _btnNext:navButton;
+
+    private var _stepper:NumericStepper;
 
 
     public function Split()
@@ -21,11 +26,16 @@ public class Split extends Screen
         _stepper.step = 1;
         addChild( _stepper );
 
-        _buttonToHome = new navButton('home');
-        _buttonToHome.label = 'home';
-        _buttonToHome.addEventListener( starling.events.Event.TRIGGERED, triggeredHandler );
-        addChild( _buttonToHome );
-        setChildIndex(_buttonToHome, 99);
+        _btnHome = new navButton('home');
+        _btnHome.label = 'home';
+        _btnHome.addEventListener( starling.events.Event.TRIGGERED, triggeredHandler );
+
+        _btnNext = new navButton('custom');
+        _btnNext.label = 'custom';
+        _btnNext.addEventListener( starling.events.Event.TRIGGERED, triggeredHandler );
+
+        _header.leftItems = new <DisplayObject>[ _btnHome ];
+        _header.rightItems = new <DisplayObject>[ _btnNext ];
 
         addEventListener(starling.events.Event.ADDED_TO_STAGE, addedHandler);
     }
@@ -36,11 +46,6 @@ public class Split extends Screen
         stage.addEventListener(starling.events.Event.RESIZE, resizeHandler);
 
         layout();
-
-        _buttonToHome = new navButton('home');
-        _buttonToHome.label = 'home';
-        _buttonToHome.addEventListener( starling.events.Event.TRIGGERED, triggeredHandler );
-        addChild( _buttonToHome );
     }
 
     private function triggeredHandler(event:starling.events.Event):void

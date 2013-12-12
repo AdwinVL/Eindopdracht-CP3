@@ -1,5 +1,5 @@
 package be.devine.cp3.billSplit.mobile {
-import be.devine.cp3.billSplit.mobile.view.Costum;
+import be.devine.cp3.billSplit.mobile.view.Custom;
 import be.devine.cp3.billSplit.mobile.view.History;
 import be.devine.cp3.billSplit.mobile.view.Home;
 import be.devine.cp3.billSplit.mobile.view.Settings;
@@ -25,14 +25,16 @@ public class Application extends Sprite
 {
     private var _appModel:AppModel;
     private var _navigator:ScreenNavigator;
+
     private static const HOME:String = "home";
     private static const SPLIT:String = "split";
-    private static const COSTUM:String = "costum";
+    private static const CUSTOM:String = "custom";
     private static const HISTORY:String = "history";
     private static const SETTINGS:String = "settings";
-    private var pages:Array;
-    private var _transitionManager:ScreenSlidingStackTransitionManager;
+
     private var _theme:MetalWorksMobileTheme;
+    private var _transitionManager:ScreenSlidingStackTransitionManager;
+    private var _pages:Array;
 
     [Embed(source="/../assets/fonts/Blanch/BLANCH_CONDENSED.otf", embedAsCFF="false", fontFamily="Blanch")]
     private static const Blanch:Class;
@@ -51,7 +53,7 @@ public class Application extends Sprite
         _navigator.autoSizeMode = ScreenNavigator.AUTO_SIZE_MODE_CONTENT;
         _navigator.addScreen( HOME, new ScreenNavigatorItem( Home ) );
         _navigator.addScreen( SPLIT, new ScreenNavigatorItem( Split ) );
-        _navigator.addScreen( COSTUM, new ScreenNavigatorItem( Costum ) );
+        _navigator.addScreen( CUSTOM, new ScreenNavigatorItem( Custom ) );
         _navigator.addScreen( HISTORY, new ScreenNavigatorItem( History ) );
         _navigator.addScreen( SETTINGS, new ScreenNavigatorItem( Settings ) );
         addChild( _navigator );
@@ -75,7 +77,7 @@ public class Application extends Sprite
         Main._splashPic.parent.removeChild(Main._splashPic);
         Main._splashPic = null;
 
-        pages=[HOME,SPLIT,COSTUM,HISTORY,SETTINGS];
+        _pages = [HOME,SPLIT,CUSTOM,HISTORY,SETTINGS];
     }
 
     private function resizeHandler(event:ResizeEvent):void
