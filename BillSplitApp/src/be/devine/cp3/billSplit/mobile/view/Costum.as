@@ -2,6 +2,7 @@ package be.devine.cp3.billSplit.mobile.view {
 import be.devine.cp3.billSplit.mobile.view.controls.navButton;
 
 import starling.events.Event;
+import starling.events.ResizeEvent;
 
 public class Costum extends Screen
 {
@@ -24,8 +25,13 @@ public class Costum extends Screen
     {
         removeEventListener(starling.events.Event.ADDED_TO_STAGE, addedHandler);
         stage.addEventListener(starling.events.Event.RESIZE, resizeHandler);
+        addEventListener(starling.events.Event.REMOVED_FROM_STAGE, removedHandler);
 
         layout();
+    }
+
+    private function removedHandler(event:Event):void {
+        stageRef.removeEventListener(ResizeEvent.RESIZE, resizeHandler);
     }
 
     private function triggeredHandler(event:starling.events.Event):void

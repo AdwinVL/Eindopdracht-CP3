@@ -4,13 +4,13 @@ import be.devine.cp3.billSplit.mobile.view.controls.navButton;
 import feathers.controls.NumericStepper;
 
 import starling.events.Event;
+import starling.events.ResizeEvent;
 
 public class Split extends Screen
 {
     private var _buttonToHome:navButton;
     private var _stepper:NumericStepper;
     public static const CLICKED:String = "clicked";
-
 
     public function Split()
     {
@@ -34,13 +34,18 @@ public class Split extends Screen
     {
         removeEventListener(starling.events.Event.ADDED_TO_STAGE, addedHandler);
         stage.addEventListener(starling.events.Event.RESIZE, resizeHandler);
-
-        layout();
+        addEventListener(starling.events.Event.REMOVED_FROM_STAGE, removedHandler);
 
         _buttonToHome = new navButton('home');
         _buttonToHome.label = 'home';
         _buttonToHome.addEventListener( starling.events.Event.TRIGGERED, triggeredHandler );
         addChild( _buttonToHome );
+
+        layout();
+    }
+
+    private function removedHandler(event:Event):void {
+        stageRef.removeEventListener(ResizeEvent.RESIZE, resizeHandler);
     }
 
     private function triggeredHandler(event:starling.events.Event):void
