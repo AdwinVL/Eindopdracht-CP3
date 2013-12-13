@@ -40,15 +40,16 @@ public class Main extends Sprite
 
     private function resizeHandler(event:flash.events.Event):void
     {
-        _splashPic.width = stage.stageWidth;
-        _splashPic.height = stage.stageHeight;
-        _splashPic.smoothing = TextureSmoothing.TRILINEAR;
-
         _starling.viewPort = new Rectangle(0, 0, stage.stageWidth, stage.stageHeight);
         _starling.stage.stageWidth = stage.stageWidth;
         _starling.stage.stageHeight = stage.stageHeight;
 
-        //_starling.stage.dispatchEvent(new starling.events.Event(starling.events.Event.RESIZE));
+        if(_splashPic != null)
+        {
+            _splashPic.width = stage.stageWidth;
+            _splashPic.height = stage.stageHeight;
+            _splashPic.smoothing = TextureSmoothing.TRILINEAR;
+        }
     }
 }
 }

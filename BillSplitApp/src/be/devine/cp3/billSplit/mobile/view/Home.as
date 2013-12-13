@@ -84,7 +84,8 @@ public class Home extends Screen
         layout();
     }
 
-    private function removedHandler(event:Event):void {
+    private function removedHandler(event:Event):void
+    {
         stageRef.removeEventListener(ResizeEvent.RESIZE, resizeHandler);
     }
 
@@ -114,6 +115,7 @@ public class Home extends Screen
 
         _stepperBg.y = _header.height;
         _stepperBg.width = stage.stageWidth;
+        _stepperBg.height = stage.stageHeight * .175;
 
         _stepper.x = 15;
         _stepper.y = _header.height + (_stepperBg.height-_stepper.height)/2;
