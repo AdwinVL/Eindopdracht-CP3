@@ -76,15 +76,15 @@ public class Split extends Screen
     private function layout():void
     {
         _header.title = String(_appModel.payers) + '-way split';
-        _header.setSize(stage.stageWidth, 70);
+        _header.setSize(stage.stageWidth, 120);
 
-        _lblToPay.x = 10;
+        _lblToPay.x = 15;
         _lblToPay.y = _header.height + 20;
-        _lblToPay.setSize(stage.stageWidth - 20, 30);
+        _lblToPay.setSize(stage.stageWidth - 30, 30);
 
-        _toPay.x = 10;
+        _toPay.x = 15;
         _toPay.y = _header.height + _lblToPay.height + 20;
-        _toPay.setSize(stage.stageWidth - 20, 50);
+        _toPay.setSize(stage.stageWidth - 30, 50);
     }
 }
 }

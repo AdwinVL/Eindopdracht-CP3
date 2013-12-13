@@ -15,6 +15,7 @@ import feathers.motion.transitions.ScreenSlidingStackTransitionManager;
 import feathers.themes.MetalWorksMobileTheme;
 
 import starling.animation.Transitions;
+import starling.animation.Tween;
 import starling.core.Starling;
 
 import starling.display.Sprite;
@@ -34,7 +35,7 @@ public class Application extends Sprite
 
     private var _theme:MetalWorksMobileTheme;
     private var _transitionManager:ScreenSlidingStackTransitionManager;
-    private var _pages:Array;
+    private var _tween:Tween;
 
     [Embed(source="/../assets/fonts/Blanch/BLANCH_CONDENSED.otf", embedAsCFF="false", fontFamily="Blanch")]
     private static const Blanch:Class;
@@ -69,15 +70,19 @@ public class Application extends Sprite
 
     private function addedHandler(event:Event):void
     {
-        trace("added Application");
         removeEventListener(Event.ADDED_TO_STAGE, addedHandler);
+
+        _tween = new Tween( Main._splashPic, 0.5);
+        _tween.fadeTo(0);
+        _tween.onComplete = function():void
+        {
+            Main._splashPic.parent.removeChild(Main._splashPic);
+            Main._splashPic = null;
+        };
+        Starling.juggler.add(_tween);
+
         addEventListener(Home.CLICKED, triggeredHandler);
         stage.addEventListener(ResizeEvent.RESIZE, resizeHandler);
-
-        Main._splashPic.parent.removeChild(Main._splashPic);
-        Main._splashPic = null;
-
-        _pages = [HOME,SPLIT,CUSTOM,HISTORY,SETTINGS];
     }
 
     private function resizeHandler(event:ResizeEvent):void

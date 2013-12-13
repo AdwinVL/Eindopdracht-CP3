@@ -110,13 +110,14 @@ public class Home extends Screen
     private function layout():void
     {
         _header.title = "billsplit app";
-        _header.setSize(stage.stageWidth, 70);
+        _header.setSize(stage.stageWidth, 120);
 
         _stepperBg.y = _header.height;
         _stepperBg.width = stage.stageWidth;
 
-        _stepper.setSize(stage.stageWidth, 90);
+        _stepper.x = 15;
         _stepper.y = _header.height + (_stepperBg.height-_stepper.height)/2;
+        _stepper.setSize(stage.stageWidth - 30, 120);
 
         _buttonToSplit.y = _header.height + _stepperBg.height;
         _buttonToCostum.y = _header.height + _stepperBg.height;

@@ -18,8 +18,10 @@ import starling.textures.TextureSmoothing;
 public class Main extends Sprite
 {
     private var _starling:Starling;
+
     [Embed(source="../assets/images/splash.jpg")]
     private var Splash:Class;
+
     public static  var _splashPic:Bitmap;
 
     public function Main()
@@ -27,21 +29,21 @@ public class Main extends Sprite
         stage.align = StageAlign.TOP_LEFT;
         stage.scaleMode = StageScaleMode.NO_SCALE;
 
-        _splashPic = new Splash();
-        _splashPic.width = 480;
-        _splashPic.height = 800;
-        _splashPic.smoothing = TextureSmoothing.TRILINEAR;
-        addChild(_splashPic);
-
-
         _starling = new Starling(Application, stage);
         _starling.start();
+
+        _splashPic = new Splash();
+        addChild(_splashPic);
 
         stage.addEventListener(flash.events.Event.RESIZE, resizeHandler);
     }
 
     private function resizeHandler(event:flash.events.Event):void
     {
+        _splashPic.width = stage.stageWidth;
+        _splashPic.height = stage.stageHeight;
+        _splashPic.smoothing = TextureSmoothing.TRILINEAR;
+
         _starling.viewPort = new Rectangle(0, 0, stage.stageWidth, stage.stageHeight);
         _starling.stage.stageWidth = stage.stageWidth;
         _starling.stage.stageHeight = stage.stageHeight;
