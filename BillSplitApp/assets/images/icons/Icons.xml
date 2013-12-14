@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TextureAtlas imagePath="Icons.png">
+	<!-- Created with Adobe Flash Professional version 13.1.0.217 -->
+	<!-- http://www.adobe.com/products/flash.html -->
+	<SubTexture name="BtnCount" x="0" y="0" width="130" height="130" pivotX="0" pivotY="0"/>
+	<SubTexture name="BtnMin" x="130" y="0" width="134" height="130" pivotX="0" pivotY="0"/>
+	<SubTexture name="BtnPlus" x="264" y="0" width="134" height="130" pivotX="0" pivotY="0"/>
+	<SubTexture name="IcnHigh" x="0" y="130" width="130" height="130" pivotX="0" pivotY="0"/>
+	<SubTexture name="IcnHistory" x="130" y="130" width="186" height="186" pivotX="0" pivotY="0"/>
+	<SubTexture name="IcnInput" x="0" y="316" width="201" height="166" pivotX="0" pivotY="0"/>
+	<SubTexture name="IcnLow" x="201" y="316" width="130" height="130" pivotX="0" pivotY="0"/>
+	<SubTexture name="IcnMedium" x="331" y="316" width="130" height="130" pivotX="0" pivotY="0"/>
+	<SubTexture name="IcnSettings" x="0" y="482" width="175" height="157" pivotX="0" pivotY="0"/>
+	<SubTexture name="IcnSplit" x="175" y="482" width="175" height="171" pivotX="0" pivotY="5"/>
+</TextureAtlas>
