@@ -77,13 +77,13 @@ public class Payer extends Sprite
         {
             _icon = new Image(_atlas.getTexture("IcnHigh"));
             _bg = new Quad(stageRef.width, 160, 0x42485f);
-            _payerName.text = "Me";
+            _payerName.text = "App owner";
         }
         else
         {
             _icon = new Image(_atlas.getTexture("IcnMedium"));
             _bg = new Quad(stageRef.width, 160, 0x42485f);
-            _payerName.text = "Payer " + i;
+            _payerName.text = "Payer " + (i + 1);
         }
 
         _icon.x = 23;

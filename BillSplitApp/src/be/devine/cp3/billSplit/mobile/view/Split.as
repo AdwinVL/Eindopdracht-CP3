@@ -31,7 +31,7 @@ public class Split extends Screen
         _btnHome.label = 'home';
         _btnHome.addEventListener( starling.events.Event.TRIGGERED, triggeredHandler );
 
-        _btnNext = new navButton('custom');
+        _btnNext = new navButton('bill');
         _btnNext.label = 'next';
         _btnNext.addEventListener( starling.events.Event.TRIGGERED, triggeredHandler );
 
@@ -94,7 +94,7 @@ public class Split extends Screen
         _lblToPay.setSize(stage.stageWidth - 30, 30);
 
         _toPay.x = 15;
-        _toPay.y = _header.height + _lblToPay.height + 20;
+        _toPay.y = _header.height + _lblToPay.height + 40;
         _toPay.setSize(stage.stageWidth - 30, 50);
         _toPay.text = _appModel.price.toString();
 
@@ -103,14 +103,10 @@ public class Split extends Screen
 
     private function addPayers():void
     {
-        trace('People to Add: '+ _appModel.payers);
-
         var yPos:uint = 0;
 
         for(var i:uint = 0; i < _appModel.payers; i++)
         {
-            trace("adding payer " + (i+1));
-
             var payer:Payer = new Payer(i, stageRef);
             payer.y = yPos;
             _payerContainer.addChild(payer);
@@ -120,8 +116,10 @@ public class Split extends Screen
             _appModel.arrPayers.push(payer);
         }
 
+        _appModel.updatePrices();
+
         _payerContainer.y = _toPay.y + _toPay.height + 10;
-        _payerContainer.height = stageRef.height;
+        _payerContainer.height = stage.stageHeight - _payerContainer.y;
         addChild(_payerContainer);
     }
 

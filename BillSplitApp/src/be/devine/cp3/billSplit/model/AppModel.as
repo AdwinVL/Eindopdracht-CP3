@@ -163,6 +163,18 @@ public class AppModel extends EventDispatcher
     {
         _procent = value;
     }
+
+    public function createList():Array
+    {
+        var arrList:Array = [];
+        for each(var payer:Payer in _arrPayers)
+        {
+            var payerStats:String = payer.payerName.text + ", you pay € " + payer.totalAmount.text;
+            arrList.push(payerStats);
+        }
+
+        return arrList;
+    }
 }
 }
 

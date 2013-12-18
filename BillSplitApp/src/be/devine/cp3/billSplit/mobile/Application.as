@@ -1,4 +1,5 @@
 package be.devine.cp3.billSplit.mobile {
+import be.devine.cp3.billSplit.mobile.view.Bill;
 import be.devine.cp3.billSplit.mobile.view.Custom;
 import be.devine.cp3.billSplit.mobile.view.History;
 import be.devine.cp3.billSplit.mobile.view.Home;
@@ -28,6 +29,7 @@ public class Application extends Sprite
     private var _navigator:ScreenNavigator;
 
     private static const HOME:String = "home";
+    private static const BILL:String = "bill";
     private static const SPLIT:String = "split";
     private static const CUSTOM:String = "custom";
     private static const HISTORY:String = "history";
@@ -47,6 +49,7 @@ public class Application extends Sprite
         _navigator = new ScreenNavigator();
         _navigator.autoSizeMode = ScreenNavigator.AUTO_SIZE_MODE_CONTENT;
         _navigator.addScreen( HOME, new ScreenNavigatorItem( Home ) );
+        _navigator.addScreen( BILL, new ScreenNavigatorItem( Bill ) );
         _navigator.addScreen( SPLIT, new ScreenNavigatorItem( Split ) );
         _navigator.addScreen( CUSTOM, new ScreenNavigatorItem( Custom ) );
         _navigator.addScreen( HISTORY, new ScreenNavigatorItem( History ) );
