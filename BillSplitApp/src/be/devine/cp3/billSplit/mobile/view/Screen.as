@@ -2,8 +2,13 @@ package be.devine.cp3.billSplit.mobile.view {
 import be.devine.cp3.billSplit.model.AppModel;
 
 import feathers.controls.Header;
+import feathers.controls.text.BitmapFontTextRenderer;
+import feathers.controls.text.StageTextTextEditor;
+import feathers.core.ITextEditor;
+import feathers.core.ITextRenderer;
 
 import flash.display.BitmapData;
+import flash.text.AutoCapitalize;
 
 import starling.display.Sprite;
 import starling.display.Stage;

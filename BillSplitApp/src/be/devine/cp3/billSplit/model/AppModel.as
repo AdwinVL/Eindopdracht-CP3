@@ -1,4 +1,6 @@
 package be.devine.cp3.billSplit.model {
+import be.devine.cp3.billSplit.mobile.view.Payer;
+
 import flash.events.Event;
 import flash.events.EventDispatcher;
 
@@ -11,7 +13,9 @@ public class AppModel extends EventDispatcher
     private var _currentPage:String = "home";
     private var _destination:String = "";
 
-    private var _payers:uint;
+    private var _payers:uint = 3;
+    private var _arrPayers:Array;
+    private var _price:uint;
 
     public static function getInstance():AppModel
     {
@@ -27,6 +31,8 @@ public class AppModel extends EventDispatcher
         {
             throw new Error("AppModel is a singleton, use getInstance() instead");
         }
+
+        _arrPayers = [];
     }
 
     [Bindable(event="currentPageChanged")]
@@ -62,6 +68,37 @@ public class AppModel extends EventDispatcher
     public function set payers(value:uint):void
     {
         _payers = value;
+    }
+
+    public function get price():uint
+    {
+        return _price;
+    }
+
+    public function set price(value:uint):void
+    {
+        if (_price == value) return;
+        _price = value;
+
+        for each(var payer:Payer in _arrPayers)
+        {
+            payer.totalAmount.text = String(_price / _payers);
+        }
+    }
+
+    public function get arrPayers():Array
+    {
+        return _arrPayers;
+    }
+
+    public function set arrPayers(value:Array):void
+    {
+        _arrPayers = value;
+    }
+
+    public function getPrice():int
+    {
+        return int(_price / _payers);
     }
 }
 }

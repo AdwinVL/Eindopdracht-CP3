@@ -1,4 +1,5 @@
 package be.devine.cp3.billSplit.mobile.view {
+import be.devine.cp3.billSplit.mobile.view.Screen;
 import be.devine.cp3.billSplit.model.AppModel;
 
 import feathers.controls.Slider;
@@ -48,7 +49,7 @@ public class Payer extends Sprite
         _totalAmount = new TextField(200, 30, "", "Insignia", 24, 0x77c4d3);
         _slider = new Slider();
 
-        if(i == 0)
+       /* if(i == 0)
         {
             trace("adding High player");
             _icon = new Image(_atlas.getTexture("IcnHigh"));
@@ -68,7 +69,21 @@ public class Payer extends Sprite
             _icon = new Image(_atlas.getTexture("IcnMedium"));
             _bg = new Quad(stageRef.width, 160, 0x4d546a);
             _name.text = "Co-payer " + i;
+        }*/
+
+        if(i == 0)
+        {
+            _icon = new Image(_atlas.getTexture("IcnHigh"));
+            _bg = new Quad(stageRef.width, 160, 0x42485f);
+            _name.text = "Me";
         }
+        else
+        {
+            _icon = new Image(_atlas.getTexture("IcnMedium"));
+            _bg = new Quad(stageRef.width, 160, 0x42485f);
+            _name.text = "Payer " + i;
+        }
+
         _icon.x = 23;
         _icon.y = 15;
 
@@ -77,7 +92,7 @@ public class Payer extends Sprite
         _name.hAlign = "left";
         _name.vAlign = "top";
 
-        _totalAmount.text = "€24";
+        _totalAmount.text = "€ " + _appModel.getPrice();
         _totalAmount.x = stageRef.width - _totalAmount.width - 20;
         _totalAmount.y = _name.y;
         _totalAmount.hAlign = "right";
@@ -88,9 +103,9 @@ public class Payer extends Sprite
 
         _slider.minimum = 0;
         _slider.maximum = 100;
-        _slider.width = stageRef.width - _percentage.x  - 100 - 30;
+        _slider.width = stageRef.width - _percentage.x  - 140;
         _slider.height = 80;
-        _slider.x = _percentage.x + 100 + 10;
+        _slider.x = _percentage.x + 100 + 20;
         _slider.y = _percentage.y;
         _slider.value = (Math.floor(100/_appModel.payers));
         _slider.step = 1;
@@ -114,6 +129,14 @@ public class Payer extends Sprite
         var slider:Slider = Slider( event.currentTarget );
         trace( "slider.value changed:", slider.value);
         _percentage.text = _slider.value.toString() + "%";
+    }
+
+    public function get totalAmount():TextField {
+        return _totalAmount;
+    }
+
+    public function set totalAmount(value:TextField):void {
+        _totalAmount = value;
     }
 }
 }

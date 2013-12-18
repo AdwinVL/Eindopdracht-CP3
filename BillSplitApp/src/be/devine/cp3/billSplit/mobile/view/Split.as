@@ -3,17 +3,15 @@ import be.devine.cp3.billSplit.mobile.view.controls.navButton;
 
 import feathers.controls.Label;
 import feathers.controls.ScrollContainer;
-import feathers.controls.Slider;
 import feathers.controls.TextInput;
+import feathers.events.FeathersEventType;
+
+import flash.text.SoftKeyboardType;
 
 import starling.display.DisplayObject;
-import starling.display.Image;
-import starling.display.Quad;
-import starling.display.Sprite;
 
 import starling.events.Event;
 import starling.events.ResizeEvent;
-import starling.text.TextField;
 
 public class Split extends Screen
 {
@@ -26,7 +24,6 @@ public class Split extends Screen
     private var _toPay:TextInput;
 
     private var _payerContainer:ScrollContainer;
-    private var _iconArr:Array;
 
     public function Split()
     {
@@ -46,8 +43,13 @@ public class Split extends Screen
         addChild(_lblToPay);
 
         _toPay = new TextInput();
+        _toPay.text = '0';
         _toPay.maxChars = 4;
-        _toPay.restrict = "0-9";
+        _toPay.restrict = '0-9';
+        _toPay.textEditorProperties.textAlign = "center";
+        _toPay.textEditorProperties.softKeyboardType = SoftKeyboardType.NUMBER;
+        _toPay.addEventListener( FeathersEventType.FOCUS_IN, input_focusInHandler );
+        _toPay.addEventListener( FeathersEventType.FOCUS_OUT, input_focusOutHandler );
         addChild(_toPay);
 
         _payerContainer = new ScrollContainer();
@@ -57,14 +59,14 @@ public class Split extends Screen
 
     private function addedHandler(event:starling.events.Event):void
     {
-        removeEventListener(starling.events.Event.ADDED_TO_STAGE, addedHandler);
-        stage.addEventListener(starling.events.Event.RESIZE, resizeHandler);
-        addEventListener(starling.events.Event.REMOVED_FROM_STAGE, removedHandler);
+        removeEventListener(Event.ADDED_TO_STAGE, addedHandler);
+        stage.addEventListener(Event.RESIZE, resizeHandler);
+        addEventListener(Event.REMOVED_FROM_STAGE, removedHandler);
 
         layout();
     }
 
-    private function removedHandler(event:Event):void {
+    private function removedHandler(event:starling.events.Event):void {
         stageRef.removeEventListener(ResizeEvent.RESIZE, resizeHandler);
 
         layout();
@@ -113,11 +115,30 @@ public class Split extends Screen
             _payerContainer.addChild(payer);
 
             yPos += payer.height;
+
+            _appModel.arrPayers.push(payer);
         }
 
         _payerContainer.y = _toPay.y + _toPay.height + 10;
         _payerContainer.height = stageRef.height;
         addChild(_payerContainer);
+    }
+
+    private function input_focusInHandler(event:starling.events.Event):void
+    {
+        _toPay.text = '';
+    }
+
+    private function input_focusOutHandler(event:starling.events.Event):void
+    {
+        if(_toPay.text == '')
+        {
+            _toPay.text = '0';
+        }
+        else
+        {
+            _appModel.price = uint(_toPay.text);
+        }
     }
 }
 }

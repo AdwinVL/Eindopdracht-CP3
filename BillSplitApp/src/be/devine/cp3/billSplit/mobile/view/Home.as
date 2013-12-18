@@ -2,10 +2,6 @@ package be.devine.cp3.billSplit.mobile.view {
 import be.devine.cp3.billSplit.mobile.view.controls.navButton;
 
 import feathers.controls.NumericStepper;
-import feathers.controls.text.StageTextTextEditor;
-import feathers.core.ITextEditor;
-
-import flash.text.AutoCapitalize;
 
 import starling.display.Image;
 
@@ -30,7 +26,6 @@ public class Home extends Screen
 
     public function Home()
     {
-
         _splitBg = new Quad(100, 100, 0x42485f);
         _customBg = new Quad(100, 100, 0x5a617a);
         _historyBg = new Quad(100, 100, 0x333745);
@@ -39,16 +34,14 @@ public class Home extends Screen
         _stepper = new NumericStepper();
         _stepper.minimum = 0;
         _stepper.maximum = 20;
-        _stepper.value = 3;
+        _stepper.value = _appModel.payers;
         _stepper.step = 1;
-        _stepper.textInputProperties.fontFamily = "Helvetica";
-        _stepper.textInputProperties._fontSize = 90;
-        _stepper.textInputProperties.paddingTop = 35;
+        _stepper.textInputProperties.paddingTop = 20;
 
         _buttonToSplit = new navButton('split');
         _buttonToSplit.label = 'Regular Split';
-        _buttonToSplit.defaultIcon = new Image(_atlas.getTexture("IcnSplit"));
         _buttonToSplit.defaultSkin = new Quad( 100, 100, 0x42485f );
+        _buttonToSplit.defaultIcon = new Image(_atlas.getTexture("IcnSplit"));
         _buttonToSplit.addEventListener( starling.events.Event.TRIGGERED, triggeredHandler );
 
         _buttonToCustom = new navButton('custom');
@@ -101,20 +94,6 @@ public class Home extends Screen
     private function removedHandler(event:Event):void
     {
         stageRef.removeEventListener(ResizeEvent.RESIZE, resizeHandler);
-    }
-
-    public static function headerTextEditorFactory():ITextEditor
-    {
-        var textEditor:StageTextTextEditor = new StageTextTextEditor();
-
-        textEditor.autoCapitalize = AutoCapitalize.NONE;
-        textEditor.autoCorrect = false;
-        textEditor.color = 0x000000;
-        textEditor.displayAsPassword = false;
-        textEditor.fontFamily = "Insignia";
-        textEditor.fontSize = 24;
-
-        return textEditor;
     }
 
     private function resizeHandler(event:ResizeEvent):void
