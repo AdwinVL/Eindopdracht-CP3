@@ -15,7 +15,7 @@ public class AppModel extends EventDispatcher
 
     private var _payers:uint = 3;
     private var _arrPayers:Array;
-    private var _price:uint;
+    private var _price:uint = 0;
 
     public static function getInstance():AppModel
     {
@@ -82,7 +82,7 @@ public class AppModel extends EventDispatcher
 
         for each(var payer:Payer in _arrPayers)
         {
-            payer.totalAmount.text = String(_price / _payers);
+            payer.totalAmount.text = String(Math.round(_price / _payers));
         }
     }
 
@@ -98,7 +98,19 @@ public class AppModel extends EventDispatcher
 
     public function getPrice():int
     {
-        return int(_price / _payers);
+        return int(Math.round(_price / _payers));
+    }
+
+    public function updateSliders(id:String, value:Number):void
+    {
+        for each(var payer:Payer in _arrPayers)
+        {
+            if(payer.payerName.text != id)
+            {
+                payer.slider.value = Math.round((100 - value) / (_payers - 1));
+                payer.percentage.text = payer.slider.value.toString() + "%";
+            }
+        }
     }
 }
 }

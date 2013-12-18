@@ -43,7 +43,7 @@ public class Split extends Screen
         addChild(_lblToPay);
 
         _toPay = new TextInput();
-        _toPay.text = '0';
+        _toPay.text = String(_appModel.price);
         _toPay.maxChars = 4;
         _toPay.restrict = '0-9';
         _toPay.textEditorProperties.textAlign = "center";
