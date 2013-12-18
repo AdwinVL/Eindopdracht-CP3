@@ -16,10 +16,8 @@ public class AppModel extends EventDispatcher
     private var _payers:uint = 3;
     private var _arrPayers:Array;
     private var _price:uint = 0;
-
-    public var changePercentFirst:uint;
-    public var changePercentAfter:uint;
-    public var changePercentVerschil:uint;
+    private var _procent:uint;
+    private var _fixations:uint;
 
     public static function getInstance():AppModel
     {
@@ -100,33 +98,70 @@ public class AppModel extends EventDispatcher
         _arrPayers = value;
     }
 
-    public function getPrice():int
+    public function updatePrices():void
     {
-        return int(Math.round(_price / _payers));
-        return int(Math.round(_price / _payers));
+        for each(var payer:Payer in _arrPayers)
+        {
+            payer.totalAmount.text = "€ " + Math.round(_price / 100 * payer.slider.value);
+        }
+    }
+
+    public function countFixations():void
+    {
+        _fixations = 0;
+
+        for each(var payer:Payer in _arrPayers)
+        {
+            if(payer.sliderChanged == true)
+            {
+                _fixations ++;
+            }
+        }
+
+        if(_fixations == _payers)
+        {
+            for each(var payer2:Payer in _arrPayers)
+            {
+                payer2.sliderChanged = false;
+            }
+        }
     }
 
     public function updateSliders(id:String, value:Number):void
     {
+        _procent = 100;
+
+        countFixations();
+
         for each(var payer:Payer in _arrPayers)
         {
-            if(payer.payerName.text != id)
+
+            if(payer.payerName.text == id || payer.sliderChanged == true)
             {
-
-                payer.slider.value = Math.round((100 - value) / (_payers - 1));
                 payer.percentage.text = payer.slider.value.toString() + "%";
+                payer.totalAmount.text = "€ " + Math.round(_price / 100 * payer.slider.value);
 
+                _procent -= payer.slider.value;
+            }
+            else
+            {
+                countFixations();
+
+                payer.slider.value = (_procent / (_payers - _fixations));
+                payer.percentage.text = payer.slider.value.toString() + "%";
                 payer.totalAmount.text = "€ " + Math.round(_price / 100 * payer.slider.value);
             }
         }
     }
 
-    public function getChangedPercentage(value:uint):uint {
+    public function get procent():uint
+    {
+        return _procent;
+    }
 
-        changePercentAfter = value;
-        changePercentVerschil = changePercentAfter - changePercentFirst;
-        changePercentFirst = value;
-        return changePercentVerschil;
+    public function set procent(value:uint):void
+    {
+        _procent = value;
     }
 }
 }

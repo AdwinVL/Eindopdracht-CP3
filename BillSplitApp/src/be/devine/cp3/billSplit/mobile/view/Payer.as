@@ -1,5 +1,4 @@
 package be.devine.cp3.billSplit.mobile.view {
-import be.devine.cp3.billSplit.mobile.view.Screen;
 import be.devine.cp3.billSplit.model.AppModel;
 
 import feathers.controls.Slider;
@@ -38,7 +37,7 @@ public class Payer extends Sprite
     private var _bg:Quad;
     private var _slider:Slider;
 
-    private var _percentChanged:uint;
+    private var _sliderChanged:Boolean = false;
 
     public function Payer(i:uint, stageRef:Stage)
     {
@@ -95,7 +94,6 @@ public class Payer extends Sprite
         _payerName.hAlign = "left";
         _payerName.vAlign = "top";
 
-        _totalAmount.text = "€ " + _appModel.getPrice();
         _totalAmount.x = stageRef.width - _totalAmount.width - 20;
         _totalAmount.y = _payerName.y;
         _totalAmount.hAlign = "right";
@@ -116,9 +114,6 @@ public class Payer extends Sprite
         _slider.addEventListener( Event.CHANGE, slider_liveChangeHandler );
         _slider.addEventListener( feathers.events.FeathersEventType.END_INTERACTION, slider_changeHandler );
 
-        _appModel.changePercentFirst = slider.value;
-        trace("First: " + slider.value);
-
         _percentage.text = _slider.value.toString() + "%";
         _percentage.hAlign = "left";
         _percentage.vAlign = "top";
@@ -138,19 +133,8 @@ public class Payer extends Sprite
 
     private function slider_changeHandler( event:Event ):void
     {
-        trace("Set After: " + slider.value);
-
-        _percentChanged = _appModel.getChangedPercentage(slider.value);
-        trace("Set Changed: " + _percentChanged);
-
-        trace("Set First: " + _appModel.changePercentFirst);
-
-        _percentage.text = _slider.value.toString() + "%";
-        _totalAmount.text = "€ " + Math.round(_appModel.price / 100 * _slider.value);
-
+        _sliderChanged = true;
         _appModel.updateSliders(_payerName.text, _slider.value);
-        // moet ongeveer worden
-        // _appModel.updateSliders(_payerName.text, _slider.currentValue - _percentageChanged);
     }
 
     public function get totalAmount():TextField {
@@ -184,6 +168,16 @@ public class Payer extends Sprite
     public function set percentage(value:TextField):void
     {
         _percentage = value;
+    }
+
+    public function get sliderChanged():Boolean
+    {
+        return _sliderChanged;
+    }
+
+    public function set sliderChanged(value:Boolean):void
+    {
+        _sliderChanged = value;
     }
 }
 }

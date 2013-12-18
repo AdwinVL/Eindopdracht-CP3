@@ -139,6 +139,7 @@ public class Split extends Screen
         else
         {
             _appModel.price = uint(_toPay.text);
+            _appModel.updatePrices();
         }
     }
 }
