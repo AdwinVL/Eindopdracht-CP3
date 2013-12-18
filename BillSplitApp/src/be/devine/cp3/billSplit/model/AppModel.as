@@ -17,6 +17,10 @@ public class AppModel extends EventDispatcher
     private var _arrPayers:Array;
     private var _price:uint = 0;
 
+    public var changePercentFirst:uint;
+    public var changePercentAfter:uint;
+    public var changePercentVerschil:uint;
+
     public static function getInstance():AppModel
     {
         if (instance == null) {
@@ -99,6 +103,7 @@ public class AppModel extends EventDispatcher
     public function getPrice():int
     {
         return int(Math.round(_price / _payers));
+        return int(Math.round(_price / _payers));
     }
 
     public function updateSliders(id:String, value:Number):void
@@ -107,11 +112,21 @@ public class AppModel extends EventDispatcher
         {
             if(payer.payerName.text != id)
             {
+
                 payer.slider.value = Math.round((100 - value) / (_payers - 1));
                 payer.percentage.text = payer.slider.value.toString() + "%";
+
                 payer.totalAmount.text = "€ " + Math.round(_price / 100 * payer.slider.value);
             }
         }
+    }
+
+    public function getChangedPercentage(value:uint):uint {
+
+        changePercentAfter = value;
+        changePercentVerschil = changePercentAfter - changePercentFirst;
+        changePercentFirst = value;
+        return changePercentVerschil;
     }
 }
 }

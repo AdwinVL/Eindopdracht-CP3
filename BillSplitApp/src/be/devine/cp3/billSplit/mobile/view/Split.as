@@ -96,6 +96,7 @@ public class Split extends Screen
         _toPay.x = 15;
         _toPay.y = _header.height + _lblToPay.height + 20;
         _toPay.setSize(stage.stageWidth - 30, 50);
+        _toPay.text = _appModel.price.toString();
 
         addPayers();
     }
