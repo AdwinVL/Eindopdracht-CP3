@@ -111,6 +111,7 @@ public class Payer extends Sprite
         _slider.value = (Math.floor(100/_appModel.payers));
         _slider.step = 1;
         _slider.page = 10;
+        _slider.addEventListener( Event.CHANGE, slider_liveChangeHandler );
         _slider.addEventListener( feathers.events.FeathersEventType.END_INTERACTION, slider_changeHandler );
 
         _percentage.text = _slider.value.toString() + "%";
@@ -125,13 +126,17 @@ public class Payer extends Sprite
         addChild(_slider);
     }
 
+    private function slider_liveChangeHandler( event:Event ):void
+    {
+        _percentage.text = _slider.value.toString() + "%";
+    }
+
     private function slider_changeHandler( event:Event ):void
     {
-        var slider:Slider = Slider( event.currentTarget );
-
         _percentage.text = _slider.value.toString() + "%";
+        _totalAmount.text = "€ " + Math.round(_appModel.price / 100 * _slider.value);
 
-        _appModel.updateSliders(_payerName.text, slider.value);
+        _appModel.updateSliders(_payerName.text, _slider.value);
     }
 
     public function get totalAmount():TextField {

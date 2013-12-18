@@ -109,6 +109,7 @@ public class AppModel extends EventDispatcher
             {
                 payer.slider.value = Math.round((100 - value) / (_payers - 1));
                 payer.percentage.text = payer.slider.value.toString() + "%";
+                payer.totalAmount.text = "€ " + Math.round(_price / 100 * payer.slider.value);
             }
         }
     }
