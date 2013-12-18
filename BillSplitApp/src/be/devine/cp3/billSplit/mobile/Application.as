@@ -37,12 +37,6 @@ public class Application extends Sprite
     private var _transitionManager:ScreenSlidingStackTransitionManager;
     private var _tween:Tween;
 
-    [Embed(source="/../assets/fonts/Blanch/BLANCH_CONDENSED.otf", embedAsCFF="false", fontFamily="Blanch")]
-    private static const Blanch:Class;
-
-    [Embed(source="/../assets/fonts/Insignia LT Std/InsigniaLTStd.otf", embedAsCFF="false", fontFamily="Insignia")]
-    private static const Insignia:Class;
-
     public function Application()
     {
         _theme = new MetalWorksMobileTheme();

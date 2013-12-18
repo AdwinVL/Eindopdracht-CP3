@@ -10,7 +10,6 @@ import feathers.controls.Button;
 
 import starling.display.DisplayObjectContainer;
 
-import flash.text.TextFormat;
 
 public class MetalWorksExtended extends MetalWorksMobileTheme
 {
@@ -24,7 +23,6 @@ public class MetalWorksExtended extends MetalWorksMobileTheme
     public function MetalWorksExtended( root:DisplayObjectContainer, scaleToDPI:Boolean = true )
     {
         super( root, scaleToDPI );
-
     }
     override protected function initialize():void
     {
