@@ -12,7 +12,7 @@ import feathers.controls.Button;
 import feathers.controls.ScreenNavigator;
 import feathers.controls.ScreenNavigatorItem;
 import feathers.motion.transitions.ScreenSlidingStackTransitionManager;
-import feathers.themes.MetalWorksMobileTheme;
+import feathers.themes.MinimalMobileTheme;
 
 import starling.animation.Transitions;
 import starling.animation.Tween;
@@ -33,13 +33,13 @@ public class Application extends Sprite
     private static const HISTORY:String = "history";
     private static const SETTINGS:String = "settings";
 
-    private var _theme:MetalWorksMobileTheme;
+    private var _theme:MinimalMobileTheme;
     private var _transitionManager:ScreenSlidingStackTransitionManager;
     private var _tween:Tween;
 
     public function Application()
     {
-        _theme = new MetalWorksMobileTheme();
+        _theme = new MinimalMobileTheme();
         _theme.setInitializerForClass(navButton, _theme.getInitializerForClass(Button));
 
         _appModel = AppModel.getInstance();

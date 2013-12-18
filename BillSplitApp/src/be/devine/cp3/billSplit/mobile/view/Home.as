@@ -4,7 +4,6 @@ import be.devine.cp3.billSplit.mobile.view.controls.navButton;
 import feathers.controls.NumericStepper;
 import feathers.controls.text.StageTextTextEditor;
 import feathers.core.ITextEditor;
-import feathers.themes.MetalWorksExtended;
 
 import flash.text.AutoCapitalize;
 
@@ -22,7 +21,6 @@ public class Home extends Screen
     private var _customBg:Quad;
     private var _historyBg:Quad;
     private var _settingsBg:Quad;
-    public var myTheme:MetalWorksExtended;
 
     public static const CLICKED:String = "clicked";
     private var _buttonToSplit:navButton;
@@ -32,7 +30,6 @@ public class Home extends Screen
 
     public function Home()
     {
-        myTheme = new MetalWorksExtended(this.stage);
 
         _splitBg = new Quad(100, 100, 0x42485f);
         _customBg = new Quad(100, 100, 0x5a617a);
@@ -50,7 +47,6 @@ public class Home extends Screen
 
         _buttonToSplit = new navButton('split');
         _buttonToSplit.label = 'Regular Split';
-        _buttonToSplit.nameList.add(MetalWorksExtended.ALTERNATE_NAME_MY_CUSTOM_BUTTON);
         _buttonToSplit.defaultIcon = new Image(_atlas.getTexture("IcnSplit"));
         _buttonToSplit.defaultSkin = new Quad( 100, 100, 0x42485f );
         _buttonToSplit.addEventListener( starling.events.Event.TRIGGERED, triggeredHandler );
