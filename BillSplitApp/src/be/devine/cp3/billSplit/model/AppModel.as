@@ -1,5 +1,4 @@
 package be.devine.cp3.billSplit.model {
-import be.devine.cp3.billSplit.mobile.view.payers.CostumPayer;
 import be.devine.cp3.billSplit.mobile.view.payers.Payer;
 
 import flash.events.Event;
@@ -84,19 +83,10 @@ public class AppModel extends EventDispatcher
 
     public function updatePrices():void
     {
-        if(_arrPayers[0] is Payer){
-            for each(var payer:Payer in _arrPayers)
-            {
-                payer.totalAmount.text = "€ " + Math.round(_price / 100 * payer.slider.value);
-            }
+        for each(var payer:Payer in _arrPayers)
+        {
+            payer.totalAmount.text = "€ " + Math.round(_price / 100 * payer.slider.value);
         }
-        else{
-            for each(var costumPayer:CostumPayer in _arrPayers)
-            {
-                costumPayer.totalAmount.text = "€ ";
-            }
-        }
-
     }
 
     public function countFixations():void
@@ -160,22 +150,11 @@ public class AppModel extends EventDispatcher
     {
         var arrList:Array = [];
 
-        if(_arrPayers[0] is Payer){
-            for each(var payer:Payer in _arrPayers)
-            {
-                var payerStats:String = payer.payerName.text + ", you pay € " + payer.totalAmount.text;
-                arrList.push(payerStats);
-            }
+        for each(var payer:Payer in _arrPayers)
+        {
+            var payerStats:String = payer.payerName.text + ", you pay € " + payer.totalAmount.text;
+            arrList.push(payerStats);
         }
-        else{
-            for each(var costumPayer:CostumPayer in _arrPayers)
-            {
-                var costumPayerStats:String = costumPayer.payerName.text + ", you pay € " + payer.totalAmount.text;
-                arrList.push(costumPayerStats);
-            }
-        }
-
-
         return arrList;
     }
 }

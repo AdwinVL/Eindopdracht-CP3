@@ -1,7 +1,7 @@
 package be.devine.cp3.billSplit.mobile.view.pages {
 import be.devine.cp3.billSplit.mobile.view.*;
 import be.devine.cp3.billSplit.mobile.view.controls.NavButton;
-import be.devine.cp3.billSplit.mobile.view.payers.CostumPayer;
+import be.devine.cp3.billSplit.mobile.view.payers.Payer;
 
 import feathers.controls.Label;
 import feathers.controls.ScrollContainer;
@@ -108,7 +108,7 @@ public class Custom extends Screen
 
         for(var i:uint = 0; i < _appModel.payers; i++)
         {
-            var payer:CostumPayer = new CostumPayer(i, stageRef);
+            var payer:Payer = new Payer(i, stageRef);
             payer.y = yPos;
             _payerContainer.addChild(payer);
 
