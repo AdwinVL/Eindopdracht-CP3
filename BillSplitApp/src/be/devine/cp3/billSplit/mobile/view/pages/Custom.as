@@ -87,8 +87,8 @@ public class Custom extends Screen
 
     private function layout():void
     {
-        _header.title = "custom";
-        _header.setSize(stage.stageWidth, 70);
+        _header.title = String(_appModel.payers) + '-way custom split';
+        _header.setSize(stage.stageWidth, 120);
 
         _lblToPay.x = 15;
         _lblToPay.y = _header.height + 20;

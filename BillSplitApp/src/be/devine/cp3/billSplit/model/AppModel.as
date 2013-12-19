@@ -3,15 +3,15 @@ import be.devine.cp3.billSplit.mobile.view.payers.CostumPayer;
 import be.devine.cp3.billSplit.mobile.view.payers.Payer;
 
 import flash.events.Event;
+
 import flash.events.EventDispatcher;
 
 public class AppModel extends EventDispatcher
 {
     private static var instance:AppModel;
 
-    public static const CURRENTPAGE_CHANGED_EVENT:String = "currentPageChanged";
+    public static const PRICE_CHANGED:String = "currentPageChanged";
 
-    private var _currentPage:String = "home";
     private var _destination:String = "";
 
     private var _payers:uint = 3;
@@ -38,30 +38,9 @@ public class AppModel extends EventDispatcher
         _arrPayers = [];
     }
 
-    [Bindable(event="currentPageChanged")]
-    public function get currentPage():String
-    {
-        return _currentPage;
-    }
-
-    public function set currentPage(value:String):void
-    {
-        if (_currentPage == value) return;
-        _currentPage = value;
-        dispatchEvent(new Event(CURRENTPAGE_CHANGED_EVENT));
-    }
-
     [Bindable(event="destinationChanged")]
     public function get destination():String
     {
-        if(_destination == "split" && _arrPayers[0] is CostumPayer)
-        {
-            _arrPayers = [];
-        }
-        if(_destination == "costum" && _arrPayers[0] is Payer)
-        {
-            _arrPayers = [];
-        }
         return _destination;
     }
 
@@ -91,18 +70,7 @@ public class AppModel extends EventDispatcher
         if (_price == value) return;
         _price = value;
 
-        if(_arrPayers[0] is Payer){
-            for each(var payer:Payer in _arrPayers)
-            {
-                payer.totalAmount.text = String(Math.round(_price / _payers));
-            }
-        }
-        else{
-            for each(var costumPayer:CostumPayer in _arrPayers)
-            {
-                costumPayer.totalAmount.text = String(Math.round(_price / _payers));
-            }
-        }
+        dispatchEvent(new Event(PRICE_CHANGED));
     }
     public function get arrPayers():Array
     {

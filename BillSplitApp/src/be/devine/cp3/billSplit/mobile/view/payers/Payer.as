@@ -5,6 +5,7 @@ import feathers.controls.Slider;
 import feathers.events.FeathersEventType;
 
 import flash.display.BitmapData;
+import flash.events.Event;
 
 import starling.display.Image;
 import starling.display.Quad;
@@ -42,6 +43,7 @@ public class Payer extends Sprite
     public function Payer(i:uint, stageRef:Stage)
     {
         _appModel = AppModel.getInstance();
+        _appModel.addEventListener(AppModel.PRICE_CHANGED, priceChangedHandler);
 
         const atlasBitmapData:BitmapData = (new ATLAS_IMAGE()).bitmapData;
         _atlas = new TextureAtlas(Texture.fromBitmapData(atlasBitmapData, false), XML(new ATLAS_XML()));
@@ -112,7 +114,7 @@ public class Payer extends Sprite
         _slider.step = 1;
         _slider.page = 10;
         _slider.addEventListener( Event.CHANGE, slider_liveChangeHandler );
-        _slider.addEventListener( feathers.events.FeathersEventType.END_INTERACTION, slider_changeHandler );
+        _slider.addEventListener( FeathersEventType.END_INTERACTION, slider_changeHandler );
 
         _percentage.text = _slider.value.toString() + "%";
         _percentage.hAlign = "left";
@@ -137,47 +139,9 @@ public class Payer extends Sprite
         _appModel.updateSliders(_payerName.text, _slider.value);
     }
 
-    public function get totalAmount():TextField {
-        return _totalAmount;
-    }
-
-    public function set totalAmount(value:TextField):void {
-        _totalAmount = value;
-    }
-
-    public function get payerName():TextField
+    private function priceChangedHandler(event:Event):void
     {
-        return _payerName;
-    }
-
-    public function get slider():Slider
-    {
-        return _slider;
-    }
-
-    public function set slider(value:Slider):void
-    {
-        _slider = value;
-    }
-
-    public function get percentage():TextField
-    {
-        return _percentage;
-    }
-
-    public function set percentage(value:TextField):void
-    {
-        _percentage = value;
-    }
-
-    public function get sliderChanged():Boolean
-    {
-        return _sliderChanged;
-    }
-
-    public function set sliderChanged(value:Boolean):void
-    {
-        _sliderChanged = value;
+        _totalAmount.text = String(Math.round(_appModel.price / _appModel.payers));
     }
 }
 }

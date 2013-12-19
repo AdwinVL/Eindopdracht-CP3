@@ -1,5 +1,5 @@
 package be.devine.cp3.billSplit.mobile {
-import be.devine.cp3.billSplit.mobile.view.Bill;
+import be.devine.cp3.billSplit.mobile.view.pages.Bill;
 import be.devine.cp3.billSplit.mobile.view.pages.Custom;
 import be.devine.cp3.billSplit.mobile.view.pages.History;
 import be.devine.cp3.billSplit.mobile.view.pages.Home;
@@ -57,7 +57,7 @@ public class Application extends Sprite
         addChild( _navigator );
 
         _transitionManager = new ScreenSlidingStackTransitionManager( _navigator );
-        _transitionManager.duration = 0.5;
+        _transitionManager.duration = .5;
         _transitionManager.ease = Transitions.EASE_OUT;
 
         _navigator.showScreen( HOME );
@@ -69,7 +69,7 @@ public class Application extends Sprite
     {
         removeEventListener(Event.ADDED_TO_STAGE, addedHandler);
 
-        _tween = new Tween( Main._splashPic, 0.5);
+        _tween = new Tween( Main._splashPic, .75);
         _tween.fadeTo(0);
         _tween.onComplete = function():void
         {
@@ -102,8 +102,7 @@ public class Application extends Sprite
     private function triggeredHandler(event:starling.events.Event):void
     {
         _navigator.showScreen( _appModel.destination );
-        _appModel.currentPage = _appModel.destination;
-        trace("[APPLICATION] --- Screen Slide --- to " + _appModel.currentPage);
+        trace("[APPLICATION] --- Screen Slide --- to " + _appModel.destination);
     }
 }
 }
