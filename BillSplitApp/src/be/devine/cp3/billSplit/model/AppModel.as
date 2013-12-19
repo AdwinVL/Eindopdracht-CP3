@@ -1,4 +1,5 @@
 package be.devine.cp3.billSplit.model {
+import be.devine.cp3.billSplit.mobile.view.CostumPayer;
 import be.devine.cp3.billSplit.mobile.view.Payer;
 
 import flash.events.Event;
@@ -53,6 +54,14 @@ public class AppModel extends EventDispatcher
     [Bindable(event="destinationChanged")]
     public function get destination():String
     {
+        if(_destination == "split" && _arrPayers[0] is CostumPayer)
+        {
+            _arrPayers = [];
+        }
+        if(_destination == "costum" && _arrPayers[0] is Payer)
+        {
+            _arrPayers = [];
+        }
         return _destination;
     }
 
@@ -82,12 +91,19 @@ public class AppModel extends EventDispatcher
         if (_price == value) return;
         _price = value;
 
-        for each(var payer:Payer in _arrPayers)
-        {
-            payer.totalAmount.text = String(Math.round(_price / _payers));
+        if(_arrPayers[0] is Payer){
+            for each(var payer:Payer in _arrPayers)
+            {
+                payer.totalAmount.text = String(Math.round(_price / _payers));
+            }
+        }
+        else{
+            for each(var costumPayer:CostumPayer in _arrPayers)
+            {
+                costumPayer.totalAmount.text = String(Math.round(_price / _payers));
+            }
         }
     }
-
     public function get arrPayers():Array
     {
         return _arrPayers;
@@ -100,10 +116,19 @@ public class AppModel extends EventDispatcher
 
     public function updatePrices():void
     {
-        for each(var payer:Payer in _arrPayers)
-        {
-            payer.totalAmount.text = "€ " + Math.round(_price / 100 * payer.slider.value);
+        if(_arrPayers[0] is Payer){
+            for each(var payer:Payer in _arrPayers)
+            {
+                payer.totalAmount.text = "€ " + Math.round(_price / 100 * payer.slider.value);
+            }
         }
+        else{
+            for each(var costumPayer:CostumPayer in _arrPayers)
+            {
+                costumPayer.totalAmount.text = "€ ";
+            }
+        }
+
     }
 
     public function countFixations():void
@@ -135,7 +160,6 @@ public class AppModel extends EventDispatcher
 
         for each(var payer:Payer in _arrPayers)
         {
-
             if(payer.payerName.text == id || payer.sliderChanged == true)
             {
                 payer.percentage.text = payer.slider.value.toString() + "%";
@@ -167,11 +191,22 @@ public class AppModel extends EventDispatcher
     public function createList():Array
     {
         var arrList:Array = [];
-        for each(var payer:Payer in _arrPayers)
-        {
-            var payerStats:String = payer.payerName.text + ", you pay € " + payer.totalAmount.text;
-            arrList.push(payerStats);
+
+        if(_arrPayers[0] is Payer){
+            for each(var payer:Payer in _arrPayers)
+            {
+                var payerStats:String = payer.payerName.text + ", you pay € " + payer.totalAmount.text;
+                arrList.push(payerStats);
+            }
         }
+        else{
+            for each(var costumPayer:CostumPayer in _arrPayers)
+            {
+                var costumPayerStats:String = costumPayer.payerName.text + ", you pay € " + payer.totalAmount.text;
+                arrList.push(costumPayerStats);
+            }
+        }
+
 
         return arrList;
     }
