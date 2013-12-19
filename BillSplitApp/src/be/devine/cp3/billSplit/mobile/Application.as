@@ -1,5 +1,5 @@
 package be.devine.cp3.billSplit.mobile {
-import be.devine.cp3.billSplit.mobile.view.Bill;
+import be.devine.cp3.billSplit.mobile.view.pages.Bill;
 import be.devine.cp3.billSplit.mobile.view.pages.Custom;
 import be.devine.cp3.billSplit.mobile.view.pages.History;
 import be.devine.cp3.billSplit.mobile.view.pages.Home;

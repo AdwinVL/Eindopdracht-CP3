@@ -1,4 +1,5 @@
-package be.devine.cp3.billSplit.mobile.view {
+package be.devine.cp3.billSplit.mobile.view.pages {
+import be.devine.cp3.billSplit.mobile.view.*;
 import be.devine.cp3.billSplit.mobile.view.controls.NavButton;
 
 import feathers.controls.Label;
