@@ -3,7 +3,6 @@ package be.devine.cp3.billSplit.mobile.view.payers {
 import be.devine.cp3.billSplit.model.AppModel;
 
 import flash.display.BitmapData;
-import flash.events.Event;
 
 import starling.display.Image;
 import starling.display.Quad;
