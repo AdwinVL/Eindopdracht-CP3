@@ -118,8 +118,6 @@ public class Split extends Screen
             _appModel.arrPayers.push(payer);
         }
 
-        _appModel.updatePrices();
-
         _payerContainer.y = _toPay.y + _toPay.height + 10;
         _payerContainer.height = stage.stageHeight - _payerContainer.y;
         addChild(_payerContainer);
@@ -139,7 +137,6 @@ public class Split extends Screen
         else
         {
             _appModel.price = uint(_toPay.text);
-            _appModel.updatePrices();
         }
     }
 }

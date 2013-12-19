@@ -101,8 +101,8 @@ public class Application extends Sprite
 
     private function triggeredHandler(event:starling.events.Event):void
     {
-        _navigator.showScreen( _appModel.destination );
         trace("[APPLICATION] --- Screen Slide --- to " + _appModel.destination);
+        _navigator.showScreen( _appModel.destination );
     }
 }
 }

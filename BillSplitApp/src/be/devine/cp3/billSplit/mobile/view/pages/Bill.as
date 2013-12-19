@@ -1,15 +1,10 @@
 package be.devine.cp3.billSplit.mobile.view.pages {
 import be.devine.cp3.billSplit.mobile.view.*;
 import be.devine.cp3.billSplit.mobile.view.controls.NavButton;
+import be.devine.cp3.billSplit.mobile.view.payers.Payer;
 
-import feathers.controls.Label;
 import feathers.controls.List;
-import feathers.controls.ScrollContainer;
-import feathers.controls.TextInput;
 import feathers.data.ListCollection;
-import feathers.events.FeathersEventType;
-
-import flash.text.SoftKeyboardType;
 
 import starling.display.DisplayObject;
 
@@ -37,7 +32,7 @@ public class Bill extends Screen
         _header.leftItems = new <DisplayObject>[ _btnPrevious ];
         _header.rightItems = new <DisplayObject>[ _btnHome ];
 
-        var arrList:Array = _appModel.createList();
+        var arrList:Array = createList();
 
         var listContent:ListCollection = new ListCollection(arrList);
 
@@ -83,6 +78,18 @@ public class Bill extends Screen
         _list.y = _header.height + 20;
         _list.width = stage.stageWidth;
         _list.height = stage.stageHeight - _list.y;
+    }
+
+    public function createList():Array
+    {
+        var arrList:Array = [];
+
+        for each(var payer:Payer in _appModel.arrPayers)
+        {
+            var payerStats:String = payer.payerName.text + ", you pay € " + payer.totalAmount.text;
+            arrList.push(payerStats);
+        }
+        return arrList;
     }
 }
 }

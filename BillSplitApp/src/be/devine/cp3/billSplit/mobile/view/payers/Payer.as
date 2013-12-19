@@ -83,9 +83,12 @@ public class Payer extends Sprite
         _totalAmount.hAlign = "right";
         _totalAmount.vAlign = "top";
 
-        // SPLIT
+        trace('payer ' + _appModel.destination);
+
         if(_appModel.destination == "split")
         {
+            trace('payer in ' + _appModel.destination);
+
             _percentage = new TextField(200, 60, "", "Insignia", 60, 0xea2e49);
             _slider = new Slider();
 
@@ -101,7 +104,7 @@ public class Payer extends Sprite
             _slider.value = (Math.floor(100/_appModel.payers));
             _slider.step = 1;
             _slider.page = 10;
-            _slider.addEventListener( Event.CHANGE, slider_liveChangeHandler );
+            _slider.addEventListener( flash.events.Event.CHANGE, slider_liveChangeHandler );
             _slider.addEventListener( feathers.events.FeathersEventType.END_INTERACTION, slider_changeHandler );
 
             _percentage.text = _slider.value.toString() + "%";
@@ -111,8 +114,8 @@ public class Payer extends Sprite
             addChild(_percentage);
             addChild(_slider);
         }
-        // COSTUM
-        else if(_appModel.destination == "custom"){
+        else if(_appModel.destination == "custom")
+        {
             _addBtn = new Button();
 
             _addBtn.x = _icon.x + _icon.width + 15;
@@ -122,6 +125,7 @@ public class Payer extends Sprite
 
             addChild(_addBtn);
         }
+
         addChild(_bg);
         addChild(_icon);
         addChild(_payerName);
@@ -129,7 +133,7 @@ public class Payer extends Sprite
 
     }
     // COSTUM
-    private function triggeredHandler(event:Event):void
+    private function triggeredHandler(event:starling.events.Event):void
     {
         trace("add clicked");
         _priceTag = new PriceTag(20);
@@ -164,20 +168,27 @@ public class Payer extends Sprite
         }
     }
 
-    private function slider_liveChangeHandler( event:Event ):void
+    private function slider_liveChangeHandler( event:flash.events.Event ):void
     {
         _percentage.text = _slider.value.toString() + "%";
     }
 
-    private function slider_changeHandler( event:Event ):void
+    private function slider_changeHandler( event:starling.events.Event ):void
     {
         _sliderChanged = true;
-        _appModel.updateSliders(_payerName.text, _slider.value);
     }
 
-    private function priceChangedHandler(event:Event):void
+    private function priceChangedHandler(event:flash.events.Event):void
     {
         _totalAmount.text = String(Math.round(_appModel.price / _appModel.payers));
+    }
+
+    public function get payerName():TextField {
+        return _payerName;
+    }
+
+    public function get totalAmount():TextField {
+        return _totalAmount;
     }
 }
 }
