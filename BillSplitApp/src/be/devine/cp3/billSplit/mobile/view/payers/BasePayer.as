@@ -86,5 +86,14 @@ public class BasePayer extends Sprite
     public function get totalAmount():TextField {
         return _totalAmount;
     }
+
+    public function trim(theNumber:Number, decPlaces:Number) : Number {
+        if (decPlaces >= 0) {
+            var temp:Number = Math.pow(10, decPlaces);
+            return Math.round(theNumber * temp) / temp;
+        }
+
+        return theNumber;
+    }
 }
 }

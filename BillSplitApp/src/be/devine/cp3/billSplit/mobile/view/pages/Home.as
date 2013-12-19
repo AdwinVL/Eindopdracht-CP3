@@ -33,8 +33,8 @@ public class Home extends Screen
         _settingsBg = new Quad(100, 100, 0x393d4b);
 
         _stepper = new NumericStepper();
-        _stepper.minimum = 0;
-        _stepper.maximum = 20;
+        _stepper.minimum = 2;
+        _stepper.maximum = _appModel.maxPayers;
         _stepper.value = _appModel.payers;
         _stepper.step = 1;
         _stepper.textInputProperties.paddingTop = 20;

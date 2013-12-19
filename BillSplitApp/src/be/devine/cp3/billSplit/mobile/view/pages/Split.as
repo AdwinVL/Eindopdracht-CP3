@@ -47,7 +47,7 @@ public class Split extends Screen
 
         _toPay = new TextInput();
         _toPay.text = String(_appModel.price);
-        _toPay.maxChars = 4;
+        _toPay.maxChars = _appModel.maxPriceChar;
         _toPay.restrict = '0-9';
         _toPay.textEditorProperties.textAlign = "center";
         _toPay.textEditorProperties.softKeyboardType = SoftKeyboardType.NUMBER;

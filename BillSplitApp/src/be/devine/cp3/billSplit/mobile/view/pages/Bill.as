@@ -17,6 +17,9 @@ public class Bill extends Screen
 
     private var _btnHome:NavButton;
     private var _btnPrevious:NavButton;
+
+    private var _arrList
+
     private var _list:List;
 
     public function Bill()
@@ -32,7 +35,13 @@ public class Bill extends Screen
         _header.leftItems = new <DisplayObject>[ _btnPrevious ];
         _header.rightItems = new <DisplayObject>[ _btnHome ];
 
-        var arrList:Array = createList();
+        var arrList:Array = [];
+
+        for each(var payer:BasePayer in _appModel.arrPayers)
+        {
+            var payerStats:String = payer.payerName.text + ", you pay € " + payer.totalAmount.text;
+            arrList.push(payerStats);
+        }
 
         var listContent:ListCollection = new ListCollection(arrList);
 
@@ -78,18 +87,6 @@ public class Bill extends Screen
         _list.y = _header.height + 20;
         _list.width = stage.stageWidth;
         _list.height = stage.stageHeight - _list.y;
-    }
-
-    public function createList():Array
-    {
-        var arrList:Array = [];
-
-        for each(var payer:BasePayer in _appModel.arrPayers)
-        {
-            var payerStats:String = payer.payerName.text + ", you pay € " + payer.totalAmount.text;
-            arrList.push(payerStats);
-        }
-        return arrList;
     }
 }
 }
