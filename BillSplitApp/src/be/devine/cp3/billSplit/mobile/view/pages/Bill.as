@@ -1,7 +1,7 @@
 package be.devine.cp3.billSplit.mobile.view.pages {
 import be.devine.cp3.billSplit.mobile.view.*;
 import be.devine.cp3.billSplit.mobile.view.controls.NavButton;
-import be.devine.cp3.billSplit.mobile.view.payers.Payer;
+import be.devine.cp3.billSplit.mobile.view.payers.BasePayer;
 
 import feathers.controls.List;
 import feathers.data.ListCollection;
@@ -84,7 +84,7 @@ public class Bill extends Screen
     {
         var arrList:Array = [];
 
-        for each(var payer:Payer in _appModel.arrPayers)
+        for each(var payer:BasePayer in _appModel.arrPayers)
         {
             var payerStats:String = payer.payerName.text + ", you pay € " + payer.totalAmount.text;
             arrList.push(payerStats);

@@ -1,7 +1,8 @@
 package be.devine.cp3.billSplit.mobile.view.pages {
 import be.devine.cp3.billSplit.mobile.view.*;
 import be.devine.cp3.billSplit.mobile.view.controls.NavButton;
-import be.devine.cp3.billSplit.mobile.view.payers.Payer;
+import be.devine.cp3.billSplit.mobile.view.payers.BasePayer;
+import be.devine.cp3.billSplit.mobile.view.payers.SplitPayer;
 
 import feathers.controls.Label;
 import feathers.controls.ScrollContainer;
@@ -109,7 +110,7 @@ public class Split extends Screen
 
         for(var i:uint = 0; i < _appModel.payers; i++)
         {
-            var payer:Payer = new Payer(i, stageRef);
+            var payer:SplitPayer = new SplitPayer(i, stageRef);
             payer.y = yPos;
             _payerContainer.addChild(payer);
 
