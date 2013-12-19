@@ -2,6 +2,8 @@
  * Created by School on 19/12/13.
  */
 package be.devine.cp3.billSplit.mobile.view.payers {
+import be.devine.cp3.billSplit.model.AppModel;
+
 import feathers.controls.Slider;
 import feathers.events.FeathersEventType;
 
@@ -20,6 +22,8 @@ public class SplitPayer extends BasePayer {
     public function SplitPayer(i:uint, stageRef:Stage) {
 
         super(i, stageRef);
+
+        _appModel.addEventListener(AppModel.PRICE_CHANGED, priceChangedHandler);
 
         _percentage = new TextField(200, 60, "", "Insignia", 60, 0xea2e49);
         _slider = new Slider();
@@ -54,6 +58,11 @@ public class SplitPayer extends BasePayer {
     private function slider_changeHandler( event:starling.events.Event ):void
     {
         _sliderChanged = true;
+    }
+
+    private function priceChangedHandler(event:flash.events.Event):void
+    {
+        _totalAmount.text = String(Math.round(_appModel.price / _appModel.payers));
     }
 }
 }

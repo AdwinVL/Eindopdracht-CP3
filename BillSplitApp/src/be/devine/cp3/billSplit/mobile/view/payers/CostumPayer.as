@@ -14,6 +14,7 @@ public class CostumPayer extends BasePayer {
     private var _addBtn:Button;
     private var _arrPriceTags:Array = [];
     private var _priceTag:PriceTag;
+    private var _tagsCounted:uint;
 
     public function CostumPayer(i:uint, stageRef:Stage)
     {
@@ -30,9 +31,18 @@ public class CostumPayer extends BasePayer {
     }
     private function triggeredHandler(event:starling.events.Event):void
     {
-        trace("add clicked");
-        _priceTag = new PriceTag(20);
-        _arrPriceTags.push(_priceTag);
+        _priceTag = new PriceTag(_appModel.price);
+        _tagsCounted = 0;
+
+        if(_appModel.price != 0){
+            _arrPriceTags.push(_priceTag);
+        }
+
+        for(var i:uint = 0; i<_arrPriceTags.length; i++){
+            _tagsCounted += _arrPriceTags[i].amount;
+        }
+
+        _totalAmount.text = "€" + _tagsCounted.toString();
 
         priceTagLayout();
     }
@@ -57,7 +67,7 @@ public class CostumPayer extends BasePayer {
 
             if((i+1) % columns == 0) // veelvoud van aantal columns
             {
-                yPos += (_arrPriceTags[i - 1].height + 5);
+                yPos += (_arrPriceTags[i - 1].height + 10);
                 xPos = _addBtn.x + _addBtn.width + 15;
             }
         }

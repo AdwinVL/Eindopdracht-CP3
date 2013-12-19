@@ -36,8 +36,8 @@ public class Custom extends Screen
         _btnHome.label = 'home';
         _btnHome.addEventListener( starling.events.Event.TRIGGERED, triggeredHandler );
 
-        _btnNext = new NavButton('custom');
-        _btnNext.label = 'custom';
+        _btnNext = new NavButton('bill');
+        _btnNext.label = 'next';
         _btnNext.addEventListener( starling.events.Event.TRIGGERED, triggeredHandler );
 
         _header.leftItems = new <DisplayObject>[ _btnHome ];
@@ -53,7 +53,6 @@ public class Custom extends Screen
         _toPay.restrict = '0-9';
         _toPay.textEditorProperties.textAlign = "center";
         _toPay.textEditorProperties.softKeyboardType = SoftKeyboardType.NUMBER;
-        _toPay.addEventListener( FeathersEventType.FOCUS_IN, input_focusInHandler );
         _toPay.addEventListener( FeathersEventType.FOCUS_OUT, input_focusOutHandler );
         addChild(_toPay);
 
@@ -122,11 +121,6 @@ public class Custom extends Screen
         _payerContainer.y = _toPay.y + _toPay.height + 10;
         _payerContainer.height = stage.stageHeight - _payerContainer.y;
         addChild(_payerContainer);
-    }
-
-    private function input_focusInHandler(event:starling.events.Event):void
-    {
-        _toPay.text = '';
     }
 
     private function input_focusOutHandler(event:starling.events.Event):void

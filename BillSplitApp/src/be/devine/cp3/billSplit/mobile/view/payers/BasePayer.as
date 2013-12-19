@@ -29,16 +29,15 @@ public class BasePayer extends Sprite
     public var _atlas:TextureAtlas;
     public var _payerName:TextField;
     public var _icon:Image;
+    public var _totalAmount:TextField;
 
     private var _splitPayer:SplitPayer;
     private var _costumPayer:CostumPayer;
-    private var _totalAmount:TextField;
     private var _bg:Quad;
 
     public function BasePayer(i:uint, stageRef:Stage)
     {
         _appModel = AppModel.getInstance();
-        _appModel.addEventListener(AppModel.PRICE_CHANGED, priceChangedHandler);
 
         const atlasBitmapData:BitmapData = (new ATLAS_IMAGE()).bitmapData;
         _atlas = new TextureAtlas(Texture.fromBitmapData(atlasBitmapData, false), XML(new ATLAS_XML()));
@@ -78,11 +77,6 @@ public class BasePayer extends Sprite
         addChild(_icon);
         addChild(_payerName);
         addChild(_totalAmount);
-    }
-
-    private function priceChangedHandler(event:flash.events.Event):void
-    {
-        _totalAmount.text = String(Math.round(_appModel.price / _appModel.payers));
     }
 
     public function get payerName():TextField {
