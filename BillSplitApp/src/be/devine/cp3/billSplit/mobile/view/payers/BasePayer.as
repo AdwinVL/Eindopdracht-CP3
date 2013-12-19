@@ -38,7 +38,6 @@ public class BasePayer extends Sprite
     public function BasePayer(i:uint, stageRef:Stage)
     {
         _appModel = AppModel.getInstance();
-        _appModel.addEventListener(AppModel.PRICE_CHANGED, priceChangedHandler);
 
         const atlasBitmapData:BitmapData = (new ATLAS_IMAGE()).bitmapData;
         _atlas = new TextureAtlas(Texture.fromBitmapData(atlasBitmapData, false), XML(new ATLAS_XML()));
@@ -80,17 +79,21 @@ public class BasePayer extends Sprite
         addChild(_totalAmount);
     }
 
-    private function priceChangedHandler(event:flash.events.Event):void
-    {
-        _totalAmount.text = String(Math.round(_appModel.price / _appModel.payers));
-    }
-
     public function get payerName():TextField {
         return _payerName;
     }
 
     public function get totalAmount():TextField {
         return _totalAmount;
+    }
+
+    public function trim(theNumber:Number, decPlaces:Number) : Number {
+        if (decPlaces >= 0) {
+            var temp:Number = Math.pow(10, decPlaces);
+            return Math.round(theNumber * temp) / temp;
+        }
+
+        return theNumber;
     }
 }
 }

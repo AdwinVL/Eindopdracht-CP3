@@ -13,8 +13,10 @@ public class AppModel extends EventDispatcher
     private var _destination:String = "";
 
     private var _payers:uint = 3;
+    private var _maxPayers:uint = 20;
     private var _arrPayers:Array;
     private var _price:uint = 0;
+    private var _maxPriceChar:uint = 4;
     private var _procent:uint;
 
     public static function getInstance():AppModel
@@ -87,6 +89,22 @@ public class AppModel extends EventDispatcher
     public function set procent(value:uint):void
     {
         _procent = value;
+    }
+
+    public function get maxPayers():uint {
+        return _maxPayers;
+    }
+
+    public function set maxPayers(value:uint):void {
+        _maxPayers = value;
+    }
+
+    public function get maxPriceChar():uint {
+        return _maxPriceChar;
+    }
+
+    public function set maxPriceChar(value:uint):void {
+        _maxPriceChar = value;
     }
 }
 }
