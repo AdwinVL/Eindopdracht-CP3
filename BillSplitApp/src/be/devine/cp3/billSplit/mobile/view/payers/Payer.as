@@ -1,4 +1,4 @@
-package be.devine.cp3.billSplit.mobile.view {
+package be.devine.cp3.billSplit.mobile.view.payers {
 import be.devine.cp3.billSplit.model.AppModel;
 
 import feathers.controls.Slider;

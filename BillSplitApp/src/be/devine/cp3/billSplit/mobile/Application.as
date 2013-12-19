@@ -1,11 +1,11 @@
 package be.devine.cp3.billSplit.mobile {
 import be.devine.cp3.billSplit.mobile.view.Bill;
-import be.devine.cp3.billSplit.mobile.view.Custom;
-import be.devine.cp3.billSplit.mobile.view.History;
-import be.devine.cp3.billSplit.mobile.view.Home;
-import be.devine.cp3.billSplit.mobile.view.Settings;
-import be.devine.cp3.billSplit.mobile.view.Split;
-import be.devine.cp3.billSplit.mobile.view.controls.navButton;
+import be.devine.cp3.billSplit.mobile.view.pages.Custom;
+import be.devine.cp3.billSplit.mobile.view.pages.History;
+import be.devine.cp3.billSplit.mobile.view.pages.Home;
+import be.devine.cp3.billSplit.mobile.view.pages.Settings;
+import be.devine.cp3.billSplit.mobile.view.pages.Split;
+import be.devine.cp3.billSplit.mobile.view.controls.NavButton;
 import be.devine.cp3.billSplit.model.AppModel;
 
 import feathers.controls.Button;
@@ -42,7 +42,7 @@ public class Application extends Sprite
     public function Application()
     {
         _theme = new MinimalMobileTheme();
-        _theme.setInitializerForClass(navButton, _theme.getInitializerForClass(Button));
+        _theme.setInitializerForClass(NavButton, _theme.getInitializerForClass(Button));
 
         _appModel = AppModel.getInstance();
 

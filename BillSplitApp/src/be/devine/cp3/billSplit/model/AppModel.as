@@ -1,6 +1,6 @@
 package be.devine.cp3.billSplit.model {
-import be.devine.cp3.billSplit.mobile.view.CostumPayer;
-import be.devine.cp3.billSplit.mobile.view.Payer;
+import be.devine.cp3.billSplit.mobile.view.payers.CostumPayer;
+import be.devine.cp3.billSplit.mobile.view.payers.Payer;
 
 import flash.events.Event;
 import flash.events.EventDispatcher;

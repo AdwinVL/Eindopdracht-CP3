@@ -1,5 +1,6 @@
-package be.devine.cp3.billSplit.mobile.view {
-import be.devine.cp3.billSplit.mobile.view.controls.navButton;
+package be.devine.cp3.billSplit.mobile.view.pages {
+import be.devine.cp3.billSplit.mobile.view.*;
+import be.devine.cp3.billSplit.mobile.view.controls.NavButton;
 
 import feathers.controls.NumericStepper;
 
@@ -19,10 +20,10 @@ public class Home extends Screen
     private var _settingsBg:Quad;
 
     public static const CLICKED:String = "clicked";
-    private var _buttonToSplit:navButton;
-    private var _buttonToCustom:navButton;
-    private var _buttonToHistory:navButton;
-    private var _buttonToSettings:navButton;
+    private var _buttonToSplit:NavButton;
+    private var _buttonToCustom:NavButton;
+    private var _buttonToHistory:NavButton;
+    private var _buttonToSettings:NavButton;
 
     public function Home()
     {
@@ -38,25 +39,25 @@ public class Home extends Screen
         _stepper.step = 1;
         _stepper.textInputProperties.paddingTop = 20;
 
-        _buttonToSplit = new navButton('split');
+        _buttonToSplit = new NavButton('split');
         _buttonToSplit.label = 'Regular Split';
         _buttonToSplit.defaultSkin = new Quad( 100, 100, 0x42485f );
         _buttonToSplit.defaultIcon = new Image(_atlas.getTexture("IcnSplit"));
         _buttonToSplit.addEventListener( starling.events.Event.TRIGGERED, triggeredHandler );
 
-        _buttonToCustom = new navButton('custom');
+        _buttonToCustom = new NavButton('custom');
         _buttonToCustom.label = 'Custom Input';
         _buttonToCustom.defaultIcon = new Image(_atlas.getTexture("IcnInput"));
         _buttonToCustom.defaultSkin = new Quad( 100, 100, 0x5a617a );
         _buttonToCustom.addEventListener( starling.events.Event.TRIGGERED, triggeredHandler );
 
-        _buttonToHistory = new navButton('history');
+        _buttonToHistory = new NavButton('history');
         _buttonToHistory.label = 'History';
         _buttonToHistory.defaultIcon = new Image(_atlas.getTexture("IcnHistory"));
         _buttonToHistory.defaultSkin = new Quad( 100, 100, 0x333745 );
         _buttonToHistory.addEventListener( starling.events.Event.TRIGGERED, triggeredHandler );
 
-        _buttonToSettings = new navButton('settings');
+        _buttonToSettings = new NavButton('settings');
         _buttonToSettings.label = 'Settings';
         _buttonToSettings.defaultIcon = new Image(_atlas.getTexture("IcnSettings"));
         _buttonToHistory.defaultSkin = new Quad( 100, 100, 0x393d4b );
@@ -66,7 +67,7 @@ public class Home extends Screen
 
     private function triggeredHandler(event:starling.events.Event):void
     {
-        var button:navButton = navButton(event.currentTarget);
+        var button:NavButton = NavButton(event.currentTarget);
 
         _appModel.payers = _stepper.value;
         _appModel.destination = button.destination;

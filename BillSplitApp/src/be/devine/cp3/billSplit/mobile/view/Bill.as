@@ -1,5 +1,5 @@
 package be.devine.cp3.billSplit.mobile.view {
-import be.devine.cp3.billSplit.mobile.view.controls.navButton;
+import be.devine.cp3.billSplit.mobile.view.controls.NavButton;
 
 import feathers.controls.Label;
 import feathers.controls.List;
@@ -19,17 +19,17 @@ public class Bill extends Screen
 {
     public static const CLICKED:String = "clicked";
 
-    private var _btnHome:navButton;
-    private var _btnPrevious:navButton;
+    private var _btnHome:NavButton;
+    private var _btnPrevious:NavButton;
     private var _list:List;
 
     public function Bill()
     {
-        _btnHome = new navButton('home');
+        _btnHome = new NavButton('home');
         _btnHome.label = 'home';
         _btnHome.addEventListener( starling.events.Event.TRIGGERED, triggeredHandler );
 
-        _btnPrevious = new navButton('split');
+        _btnPrevious = new NavButton('split');
         _btnPrevious.label = 'previous';
         _btnPrevious.addEventListener( starling.events.Event.TRIGGERED, triggeredHandler );
 
@@ -64,7 +64,7 @@ public class Bill extends Screen
 
     private function triggeredHandler(event:starling.events.Event):void
     {
-        var button:navButton = navButton(event.currentTarget);
+        var button:NavButton = NavButton(event.currentTarget);
         _appModel.destination = button.destination;
         dispatchEventWith(CLICKED, true);
     }

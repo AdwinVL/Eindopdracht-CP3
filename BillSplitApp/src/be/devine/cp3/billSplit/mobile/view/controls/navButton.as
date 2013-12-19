@@ -3,13 +3,13 @@ import be.devine.cp3.billSplit.model.AppModel;
 
 import feathers.controls.Button;
 
-public class navButton extends Button {
+public class NavButton extends Button {
 
     private var _appModel:AppModel;
 
     public var destination:String;
 
-    public function navButton(destination:String)
+    public function NavButton(destination:String)
     {
         _appModel = AppModel.getInstance();
 

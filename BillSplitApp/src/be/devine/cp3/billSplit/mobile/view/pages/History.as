@@ -1,6 +1,7 @@
-package be.devine.cp3.billSplit.mobile.view {
+package be.devine.cp3.billSplit.mobile.view.pages {
+import be.devine.cp3.billSplit.mobile.view.*;
 
-import be.devine.cp3.billSplit.mobile.view.controls.navButton;
+import be.devine.cp3.billSplit.mobile.view.controls.NavButton;
 
 import starling.display.DisplayObject;
 
@@ -11,16 +12,16 @@ public class History extends Screen
 {
     public static const CLICKED:String = "clicked";
 
-    private var _btnHome:navButton;
-    private var _btnNext:navButton;
+    private var _btnHome:NavButton;
+    private var _btnNext:NavButton;
 
     public function History()
     {
-        _btnHome = new navButton('home');
+        _btnHome = new NavButton('home');
         _btnHome.label = 'home';
         _btnHome.addEventListener( starling.events.Event.TRIGGERED, triggeredHandler );
 
-        _btnNext = new navButton('custom');
+        _btnNext = new NavButton('custom');
         _btnNext.label = 'custom';
         _btnNext.addEventListener( starling.events.Event.TRIGGERED, triggeredHandler );
 
@@ -45,7 +46,7 @@ public class History extends Screen
 
     private function triggeredHandler(event:starling.events.Event):void
     {
-        var button:navButton = navButton(event.currentTarget);
+        var button:NavButton = NavButton(event.currentTarget);
         _appModel.destination = button.destination;
         dispatchEventWith(CLICKED, true);
     }
