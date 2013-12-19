@@ -18,23 +18,24 @@ public class Bill extends Screen
     private var _btnHome:NavButton;
     private var _btnPrevious:NavButton;
 
-    private var _arrList:Array;
-
+    private var _btnFinish:NavButton;
+    private var _arrList: Array;
     private var _list:List;
     private var _listContent:ListCollection;
 
     public function Bill()
     {
-        _btnHome = new NavButton('home');
-        _btnHome.label = 'home';
-        _btnHome.addEventListener( starling.events.Event.TRIGGERED, triggeredHandler );
+        _btnFinish = new NavButton('history');
+        _btnFinish.label = 'finish';
+        _btnFinish.addEventListener( starling.events.Event.TRIGGERED, triggeredHandler );
+        _btnFinish.addEventListener( starling.events.Event.TRIGGERED, finishHandler );
 
         _btnPrevious = new NavButton('split');
         _btnPrevious.label = 'previous';
         _btnPrevious.addEventListener( starling.events.Event.TRIGGERED, triggeredHandler );
 
         _header.leftItems = new <DisplayObject>[ _btnPrevious ];
-        _header.rightItems = new <DisplayObject>[ _btnHome ];
+        _header.rightItems = new <DisplayObject>[ _btnFinish ];
 
         _arrList = [];
 
@@ -77,6 +78,11 @@ public class Bill extends Screen
         dispatchEventWith(CLICKED, true);
     }
 
+    private function finishHandler(event:Event):void
+    {
+
+    }
+
     private function resizeHandler(event:starling.events.Event):void
     {
         layout();
@@ -90,6 +96,8 @@ public class Bill extends Screen
         _list.y = _header.height + 20;
         _list.width = stage.stageWidth;
         _list.height = stage.stageHeight - _list.y;
+
+        _btnFinish.y = _list.y + _list.height + 10;
     }
 }
 }

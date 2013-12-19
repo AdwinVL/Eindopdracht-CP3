@@ -3,7 +3,6 @@ package be.devine.cp3.billSplit.mobile.view.payers {
 import be.devine.cp3.billSplit.model.AppModel;
 
 import flash.display.BitmapData;
-import flash.events.Event;
 
 import starling.display.Image;
 import starling.display.Quad;
@@ -29,10 +28,10 @@ public class BasePayer extends Sprite
     public var _atlas:TextureAtlas;
     public var _payerName:TextField;
     public var _icon:Image;
+    public var _totalAmount:TextField;
 
     private var _splitPayer:SplitPayer;
     private var _costumPayer:CostumPayer;
-    private var _totalAmount:TextField;
     private var _bg:Quad;
 
     public function BasePayer(i:uint, stageRef:Stage)

@@ -56,15 +56,14 @@ public class SplitPayer extends BasePayer {
         totalAmount.text = '€ ' + trim(price, 2);
     }
 
-    private function priceChangedHandler(event:flash.events.Event = null ):void
-    {
-        var price:Number = ((_slider.value / 100) * _appModel.price);
-        totalAmount.text = '€ ' + trim(price, 2);
-    }
-
     private function slider_changeHandler( event:starling.events.Event ):void
     {
         _sliderChanged = true;
+    }
+
+    private function priceChangedHandler(event:flash.events.Event = null):void
+    {
+        _totalAmount.text = String(Math.round(_appModel.price / _appModel.payers));
     }
 }
 }
