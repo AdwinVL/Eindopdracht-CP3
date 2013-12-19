@@ -116,6 +116,11 @@ public class Split extends Screen
 
             yPos += payer.height;
 
+            if(_appModel.arrPayers.length == _appModel.payers )
+            {
+                _appModel.arrPayers = [];
+            }
+
             _appModel.arrPayers.push(payer);
         }
 

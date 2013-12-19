@@ -18,9 +18,10 @@ public class Bill extends Screen
     private var _btnHome:NavButton;
     private var _btnPrevious:NavButton;
 
-    private var _arrList
+    private var _arrList:Array;
 
     private var _list:List;
+    private var _listContent:ListCollection;
 
     public function Bill()
     {
@@ -35,18 +36,19 @@ public class Bill extends Screen
         _header.leftItems = new <DisplayObject>[ _btnPrevious ];
         _header.rightItems = new <DisplayObject>[ _btnHome ];
 
-        var arrList:Array = [];
+        _arrList = [];
 
         for each(var payer:BasePayer in _appModel.arrPayers)
         {
-            var payerStats:String = payer.payerName.text + ", you pay € " + payer.totalAmount.text;
-            arrList.push(payerStats);
+            var payerStats:String = payer.payerName.text + ", you pay " + payer.totalAmount.text;
+            _arrList.push(payerStats);
         }
 
-        var listContent:ListCollection = new ListCollection(arrList);
+        _listContent = new ListCollection(_arrList);
 
         _list = new List();
-        _list.dataProvider = listContent;
+        _list.dataProvider = _listContent;
+        _list.isSelectable = false;
         addChild( _list );
 
         addEventListener(starling.events.Event.ADDED_TO_STAGE, addedHandler);
@@ -71,6 +73,7 @@ public class Bill extends Screen
     {
         var button:NavButton = NavButton(event.currentTarget);
         _appModel.destination = button.destination;
+
         dispatchEventWith(CLICKED, true);
     }
 
