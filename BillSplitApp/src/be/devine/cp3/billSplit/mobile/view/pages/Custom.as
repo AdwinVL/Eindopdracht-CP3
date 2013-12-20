@@ -53,6 +53,7 @@ public class Custom extends Screen
         _toPay.restrict = '0-9';
         _toPay.textEditorProperties.textAlign = "center";
         _toPay.textEditorProperties.softKeyboardType = SoftKeyboardType.NUMBER;
+        _toPay.addEventListener( FeathersEventType.FOCUS_IN, input_focusInHandler );
         _toPay.addEventListener( FeathersEventType.FOCUS_OUT, input_focusOutHandler );
         addChild(_toPay);
 
@@ -117,12 +118,22 @@ public class Custom extends Screen
 
             yPos += payer.height;
 
+            if(_appModel.arrPayers.length == _appModel.payers )
+            {
+                _appModel.arrPayers = [];
+            }
+
             _appModel.arrPayers.push(payer);
         }
 
         _payerContainer.y = _toPay.y + _toPay.height + 10;
         _payerContainer.height = stage.stageHeight - _payerContainer.y;
         addChild(_payerContainer);
+    }
+
+    private function input_focusInHandler(event:starling.events.Event):void
+    {
+        _toPay.text = '';
     }
 
     private function input_focusOutHandler(event:starling.events.Event):void

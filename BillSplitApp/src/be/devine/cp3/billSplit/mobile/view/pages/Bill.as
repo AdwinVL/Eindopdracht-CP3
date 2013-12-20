@@ -1,4 +1,5 @@
 package be.devine.cp3.billSplit.mobile.view.pages {
+import be.devine.cp3.billSplit.factory.BillVoFactory;
 import be.devine.cp3.billSplit.mobile.view.*;
 import be.devine.cp3.billSplit.mobile.view.controls.NavButton;
 import be.devine.cp3.billSplit.mobile.view.payers.BasePayer;
@@ -51,7 +52,7 @@ public class Bill extends Screen
 
         for each(var payer:BasePayer in _appModel.arrPayers)
         {
-            var payerStats:String = payer.payerName.text + ", you pay " + payer.totalAmount.text;
+            var payerStats:String = payer.payerName.text + ", you pay " + payer.totalAmount.text + " euro";
             _arrList.push(payerStats);
         }
 
@@ -83,9 +84,21 @@ public class Bill extends Screen
     private function triggeredHandler(event:starling.events.Event):void
     {
         var button:NavButton = NavButton(event.currentTarget);
-        _appModel.destination = button.destination;
 
-        dispatchEventWith(CLICKED, true);
+        if(button.label == 'finish')
+        {
+            _appModel.update(BillVoFactory.createBillVOFromArray(_appModel.arrPayers));
+
+            _appModel.destination = button.destination;
+
+            dispatchEventWith(CLICKED, true);
+        }
+        else
+        {
+            _appModel.destination = button.destination;
+
+            dispatchEventWith(CLICKED, true);
+        }
     }
 
     private function resizeHandler(event:starling.events.Event):void

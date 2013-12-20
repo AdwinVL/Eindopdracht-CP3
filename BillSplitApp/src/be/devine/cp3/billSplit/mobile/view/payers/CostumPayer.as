@@ -1,6 +1,3 @@
-/**
- * Created by School on 19/12/13.
- */
 package be.devine.cp3.billSplit.mobile.view.payers {
 import be.devine.cp3.billSplit.mobile.view.controls.PriceTag;
 
