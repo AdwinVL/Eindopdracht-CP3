@@ -65,5 +65,13 @@ public class SplitPayer extends BasePayer {
     {
         _totalAmount.text = String(Math.round(_appModel.price / _appModel.payers));
     }
+
+    public function get slider():Slider {
+        return _slider;
+    }
+
+    public function set slider(value:Slider):void {
+        _slider = value;
+    }
 }
 }

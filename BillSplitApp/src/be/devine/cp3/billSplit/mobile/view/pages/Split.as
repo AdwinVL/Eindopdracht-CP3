@@ -1,12 +1,14 @@
 package be.devine.cp3.billSplit.mobile.view.pages {
 import be.devine.cp3.billSplit.mobile.view.*;
 import be.devine.cp3.billSplit.mobile.view.controls.NavButton;
-import be.devine.cp3.billSplit.mobile.view.payers.BasePayer;
 import be.devine.cp3.billSplit.mobile.view.payers.SplitPayer;
+
+import feathers.controls.Alert;
 
 import feathers.controls.Label;
 import feathers.controls.ScrollContainer;
 import feathers.controls.TextInput;
+import feathers.data.ListCollection;
 import feathers.events.FeathersEventType;
 
 import flash.text.SoftKeyboardType;
@@ -27,6 +29,7 @@ public class Split extends Screen
     private var _toPay:TextInput;
 
     private var _payerContainer:ScrollContainer;
+    private var _alert:Alert;
 
     public function Split()
     {
@@ -78,8 +81,34 @@ public class Split extends Screen
     private function triggeredHandler(event:starling.events.Event):void
     {
         var button:NavButton = NavButton(event.currentTarget);
-        _appModel.destination = button.destination;
-        dispatchEventWith(CLICKED, true);
+        _appModel.procent = 0;
+
+        for each(var payer:SplitPayer in _appModel.arrPayers)
+        {
+            _appModel.procent += Math.round(payer.slider.value);
+            trace(_appModel.procent);
+        }
+
+        if(button.destination != 'home' && _appModel.procent > 100)
+        {
+            _alert = Alert.show( "You have more than 100%, that doesn't even exist!", "Oh God!", new ListCollection(
+                    [
+                        { label: "Sorry", triggered: okButton_triggeredHandler }
+                    ]) );
+        }
+        else if(button.destination != 'home' && _appModel.procent < 100)
+        {
+            _alert = Alert.show( "You have less than 100%, Somebody needs to pay more!", "Oh God!", new ListCollection(
+                    [
+                        { label: "Sorry", triggered: okButton_triggeredHandler }
+                    ]) );
+        }
+        else
+        {
+            _appModel.destination = button.destination;
+
+            dispatchEventWith(CLICKED, true);
+        }
     }
 
     private function resizeHandler(event:starling.events.Event):void
@@ -144,6 +173,11 @@ public class Split extends Screen
         {
             _appModel.price = uint(_toPay.text);
         }
+    }
+
+    private function okButton_triggeredHandler():void
+    {
+
     }
 }
 }
