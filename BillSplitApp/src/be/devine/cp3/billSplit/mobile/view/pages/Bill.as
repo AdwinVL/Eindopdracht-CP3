@@ -28,11 +28,21 @@ public class Bill extends Screen
         _btnFinish = new NavButton('history');
         _btnFinish.label = 'finish';
         _btnFinish.addEventListener( starling.events.Event.TRIGGERED, triggeredHandler );
-        _btnFinish.addEventListener( starling.events.Event.TRIGGERED, finishHandler );
 
-        _btnPrevious = new NavButton('split');
-        _btnPrevious.label = 'previous';
-        _btnPrevious.addEventListener( starling.events.Event.TRIGGERED, triggeredHandler );
+        if(_appModel.previousPage == 'split')
+        {
+            _btnPrevious = new NavButton('split');
+            _btnPrevious.label = 'previous';
+            _btnPrevious.addEventListener( starling.events.Event.TRIGGERED, triggeredHandler );
+        }
+        else if(_appModel.previousPage == 'custom')
+        {
+            _btnPrevious = new NavButton('custom');
+            _btnPrevious.label = 'previous';
+            _btnPrevious.addEventListener( starling.events.Event.TRIGGERED, triggeredHandler );
+        }
+        else
+        {}
 
         _header.leftItems = new <DisplayObject>[ _btnPrevious ];
         _header.rightItems = new <DisplayObject>[ _btnFinish ];
@@ -76,11 +86,6 @@ public class Bill extends Screen
         _appModel.destination = button.destination;
 
         dispatchEventWith(CLICKED, true);
-    }
-
-    private function finishHandler(event:Event):void
-    {
-
     }
 
     private function resizeHandler(event:starling.events.Event):void

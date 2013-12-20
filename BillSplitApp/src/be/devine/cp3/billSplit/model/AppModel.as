@@ -1,5 +1,7 @@
 package be.devine.cp3.billSplit.model {
 
+import be.devine.cp3.billSplit.model.service.BillService;
+
 import flash.events.Event;
 
 import flash.events.EventDispatcher;
@@ -9,8 +11,10 @@ public class AppModel extends EventDispatcher
     private static var instance:AppModel;
 
     public static const PRICE_CHANGED:String = "currentPageChanged";
+    public static const PAYERS_LOADED:String = "payers loaded";
 
     private var _destination:String = "";
+    private var _previousPage:String = "";
 
     private var _payers:uint = 3;
     private var _maxPayers:uint = 20;
@@ -47,6 +51,19 @@ public class AppModel extends EventDispatcher
     {
         if (_destination == value) return;
         _destination = value;
+    }
+
+    public function load():void {
+        var billService:BillService = new BillService();
+        billService.addEventListener(Event.COMPLETE, loadCompleteHandler);
+        billService.load(_arrPayers);
+    }
+
+    private function loadCompleteHandler(event:Event):void {
+        var billService:BillService = event.target as BillService;
+        this.arrPayers = billService.bills;
+
+        dispatchEvent(new Event(PAYERS_LOADED));
     }
 
     public function get payers():uint
@@ -105,6 +122,14 @@ public class AppModel extends EventDispatcher
 
     public function set maxPriceChar(value:uint):void {
         _maxPriceChar = value;
+    }
+
+    public function get previousPage():String {
+        return _previousPage;
+    }
+
+    public function set previousPage(value:String):void {
+        _previousPage = value;
     }
 }
 }

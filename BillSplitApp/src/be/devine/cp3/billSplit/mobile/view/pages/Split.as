@@ -105,6 +105,7 @@ public class Split extends Screen
         }
         else
         {
+            _appModel.previousPage = _appModel.destination;
             _appModel.destination = button.destination;
 
             dispatchEventWith(CLICKED, true);

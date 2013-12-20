@@ -77,7 +77,9 @@ public class Custom extends Screen
     private function triggeredHandler(event:starling.events.Event):void
     {
         var button:NavButton = NavButton(event.currentTarget);
+        _appModel.previousPage = _appModel.destination;
         _appModel.destination = button.destination;
+
         dispatchEventWith(CLICKED, true);
     }
 

@@ -1,5 +1,7 @@
 package be.devine.cp3.billSplit.model.service {
 
+import be.devine.cp3.billSplit.model.AppModel;
+
 import flash.events.Event;
 
 import flash.events.EventDispatcher;
@@ -14,45 +16,24 @@ public class BillService extends EventDispatcher {
     public function BillService()
     {}
 
-    public function load():void
+    public function load(arrPayers:Array):void
     {
-        var songsFile:File = File.applicationStorageDirectory.resolvePath("bills.json");
+        var billFile:File = File.applicationStorageDirectory.resolvePath("bills.json");
 
-        if(!songsFile.exists)
+        if(!billFile.exists)
         {
             var writeStream:FileStream = new FileStream();
-            writeStream.open(songsFile, FileMode.WRITE);
+            writeStream.open(billFile, FileMode.WRITE);
             writeStream.writeUTFBytes(JSON.stringify([
                 {
-                    file: "01.mp3",
-                    title: "Little Green Bag",
-                    artist: "George Baker Selection",
-                    length: 195
-                },
-                {
-                    file: "02.mp3",
-                    title: "Hooked On A Feeling",
-                    artist: "Blue Swede",
-                    length: 173
-                },
-                {
-                    file: "03.mp3",
-                    title: "I Gotcha",
-                    artist: "Joe Text",
-                    length: 148
-                },
-                {
-                    file: "04.mp3",
-                    title: "Coconut",
-                    artist: "Harry Nilsson",
-                    length: 231
+                    dummy: arrPayers
                 }
             ]));
             writeStream.close();
         }
 
         var readStream:FileStream = new FileStream();
-        readStream.open(songsFile, FileMode.READ);
+        readStream.open(billFile, FileMode.READ);
 
         var str:String = readStream.readUTFBytes(readStream.bytesAvailable);
         var parsedJSON:Array = JSON.parse(str) as Array;

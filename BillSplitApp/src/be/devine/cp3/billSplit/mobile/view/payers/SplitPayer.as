@@ -63,7 +63,8 @@ public class SplitPayer extends BasePayer {
 
     private function priceChangedHandler(event:flash.events.Event = null):void
     {
-        _totalAmount.text = String(Math.round(_appModel.price / _appModel.payers));
+        var price:Number = ((_slider.value / 100) * _appModel.price);
+        totalAmount.text = '€ ' + trim(price, 2);
     }
 
     public function get slider():Slider {
